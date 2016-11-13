@@ -14,6 +14,7 @@ dots_and_bars(gg_obj, binaxis = "y", stackdir = "center", dotsize = 0.5,
 }
 \description{
 Pipe the ggplot object into this, if not immediately, uses %+%
+Right now, only uses default values for errorbars
 }
 \examples{
 ggplot(aes(x=x,y=y)) \%+\%

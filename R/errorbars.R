@@ -24,6 +24,7 @@ errorbars <- function(gg_obj, ...) {
 #' Make dotplots with errorbars with one function
 #'
 #' Pipe the ggplot object into this, if not immediately, uses %+%
+#' Right now, only uses default values for errorbars
 #'
 #' @param the ggplot object
 #' @param \dots values for the stat_summary
