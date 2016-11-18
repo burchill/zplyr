@@ -7,12 +7,14 @@
 errorbars(gg_obj, ...)
 }
 \arguments{
-\item{the}{ggplot object}
+\item{gg_obj}{the ggplot object}
 
 \item{\dots}{values for the stat_summary}
 }
 \description{
-Pipe the ggplot object into this, if not immediately, uses %+%
+Pipe the ggplot object into this. If not immediately after
+\code{ggplot(\dots)}, use \code{\%+\%} instead of \code{+} to add layers until
+the ggplot object is piped into the function.
 }
 \examples{
 ggplot(aes(x=x,y=y)) \%+\%

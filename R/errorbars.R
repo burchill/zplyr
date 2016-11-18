@@ -1,11 +1,13 @@
 #' Make errorbars with one function
 #'
-#' Pipe the ggplot object into this, if not immediately, uses %+%
+#' Pipe the ggplot object into this. If not immediately after
+#' \code{ggplot(\dots)}, use \code{\%+\%} instead of \code{+} to add layers until
+#' the ggplot object is piped into the function.
 #'
-#' @param the ggplot object
+#' @param gg_obj the ggplot object
 #' @param \dots values for the stat_summary
 #' @examples
-#' ggplot(aes(x=x,y=y)) %+%
+#' ggplot(aes(x = x, y = y)) %+%
 #'    geom_point() %>%
 #'    errorbars() +
 #'    xlab("WHAAAT")
