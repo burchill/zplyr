@@ -17,7 +17,7 @@ Pipe the ggplot object into this. If not immediately after
 the ggplot object is piped into the function.
 }
 \examples{
-ggplot(aes(x=x,y=y)) \%+\%
+ggplot(aes(x = x, y = y)) \%+\%
    geom_point() \%>\%
    errorbars() +
    xlab("WHAAAT")

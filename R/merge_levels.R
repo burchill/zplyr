@@ -2,7 +2,8 @@
 #'
 #' Instead of using  \code{ifelse} statements to combine values in a factor
 #' (e.g. when you want to simplify variables for a model), you can rename,
-#' combine, and reorder the levels of a factor with one easy list.
+#' combine, and reorder the levels of a factor with one easy list. If there's an empty
+#' level that isn't included, \code{merge_factor} will warn you, but go ahead and remove it.
 #'
 #' The same effect \strong{could} be achieved with something like:
 #' \code{levels(my_factor)<-c(old1=new1,old2=new1,old3=new2,old4=new2)},
@@ -35,8 +36,12 @@ merge_factor <- function(.data, arg_list) {
   new_factor <- .data
   arg_vals <- unlist(arg_list, use.names = FALSE)
 
-  if (!all(arg_vals %in% levels(.data))) {
+  if (!all(arg_vals %in% unique(.data))) {
     stop("Not all of the old values are in factor")
+  }
+  if (!all(arg_vals %in% levels(.data))) {
+    warning("There is an empty level being removed")
+    new_factor<-factor(new_factor)
   }
   if (length(arg_vals) != length(levels(.data))) {
     stop("Not all levels in factor are covered")
