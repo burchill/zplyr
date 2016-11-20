@@ -37,14 +37,18 @@ merge_factor <- function(.data, arg_list) {
   arg_vals <- unlist(arg_list, use.names = FALSE)
 
   if (!all(arg_vals %in% unique(.data))) {
-    stop("Not all of the old values are in factor")
+    newlevs<-arg_vals[arg_vals %in% unique(.data)]
+    stop(paste0("Levels referenced in factor don't exist: ",
+                paste0(newlevs, collapse = ", ")))
   }
-  if (!all(arg_vals %in% levels(.data))) {
-    warning("There is an empty level being removed")
+  if (!all(unique(.data) %in% arg_vals)) {
+    missedlevs <- unique(.data)[unique(.data) %in% arg_vals]
+    stop(paste0("Not all non-empty levels in factor are covered: ",
+                paste0(missedlevs, collapse = ", ")))
+  }
+  if (!all(levels(.data) %in% arg_vals)) {
+    warning("An empty level has been removed")
     new_factor<-factor(new_factor)
-  }
-  if (length(arg_vals) != length(levels(.data))) {
-    stop("Not all levels in factor are covered")
   }
   # for levels(x) <- ... it's: c(old_val = new_val, ...)
   levels(new_factor) <- setNames(arg_names_expanded, arg_vals)
@@ -80,8 +84,10 @@ merge_levels <- function(.data, ...) {
     init=c())
 
   arg_vals <- unlist(arg_list, use.names = FALSE)
-  if (!all(arg_vals %in% levels(.data))) {
-    stop("Not all of the old values are in factor")
+  if (!all(arg_vals %in% unique(.data))) {
+    newlevs<-arg_vals[arg_vals %in% unique(.data)]
+    stop(paste0("Levels referenced in factor don't exist: ",
+                paste0(newlevs, collapse = ", ")))
   }
   # for levels(x) <- ... it's: c(old_val = new_val, ...)
   new_vec <- setNames(arg_names_expanded, arg_vals)
