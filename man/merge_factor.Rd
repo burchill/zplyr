@@ -4,12 +4,16 @@
 \alias{merge_factor}
 \title{Combine/rename/reorder levels in a factor}
 \usage{
-merge_factor(.data, arg_list)
+merge_factor(.data, arg_list, contr_f = NULL, ...)
 }
 \arguments{
 \item{.data}{the factor you want to respecify}
 
 \item{arg_list}{a list whose names are the new levels, whose values are the old levels, and whose order is the new order of the levels}
+
+\item{contr_f}{Optional function to determine contrast code. I.e., \code{contr.sum}, or \code{contr.helmert}, etc. If unused, \code{merge_factor} won't touch the contrast coding. Automatically names contrasts as would appear by default.}
+
+\item{\dots}{Optional arguments to pass in to \code{contr_f}}
 }
 \value{
 a factor with levels and values as you specified
@@ -30,6 +34,14 @@ inverse--in essence: \code{levels(my_factor)<-list(new1=c(old1,old2),new2=c(old3
 my_factor <- factor(c("d","b","c","d","a","a","d","d"))
 levels(my_factor)
 merge_factor(my_factor, list("CIsFirst"="c","AandB"=c("a","b"),"d"))
+
+# Demonstrates how contrasts are named by default
+merged_factor <- merge_factor(my_factor, 
+                              list("CIsFirst"="c","AandB"=c("a","b"),"d"),
+                              contr.helmert)
+merged_factor
+contrasts(merged_factor)
+
 
 }
 

@@ -13,14 +13,24 @@
 #'
 #' @param .data the factor you want to respecify
 #' @param arg_list a list whose names are the new levels, whose values are the old levels, and whose order is the new order of the levels
+#' @param contr_f Optional function to determine contrast code. I.e., \code{contr.sum}, or \code{contr.helmert}, etc. If unused, \code{merge_factor} won't touch the contrast coding. Automatically names contrasts as would appear by default. 
+#' @param \dots Optional arguments to pass in to \code{contr_f}
 #' @return a factor with levels and values as you specified
 #' @examples
 #' my_factor <- factor(c("d","b","c","d","a","a","d","d"))
 #' levels(my_factor)
 #' merge_factor(my_factor, list("CIsFirst"="c","AandB"=c("a","b"),"d"))
 #'
+#' # Demonstrates how contrasts are named by default
+#' merged_factor <- merge_factor(my_factor, 
+#'                               list("CIsFirst"="c","AandB"=c("a","b"),"d"),
+#'                               contr.helmert)
+#' merged_factor
+#' contrasts(merged_factor)
+#'
+#'
 #' @export
-merge_factor <- function(.data, arg_list) {
+merge_factor <- function(.data, arg_list, contr_f=NULL, ...) {
   arg_names <- names(arg_list)
   arg_names_expanded <- Reduce(
     function(x,i) {
@@ -37,21 +47,34 @@ merge_factor <- function(.data, arg_list) {
   arg_vals <- unlist(arg_list, use.names = FALSE)
 
   if (!all(arg_vals %in% unique(.data))) {
-    newlevs<-arg_vals[arg_vals %in% unique(.data)]
+    newlevs<-arg_vals[!(arg_vals %in% unique(.data))]
     stop(paste0("Levels referenced in factor don't exist: ",
                 paste0(newlevs, collapse = ", ")))
   }
   if (!all(unique(.data) %in% arg_vals)) {
-    missedlevs <- unique(.data)[unique(.data) %in% arg_vals]
+    missedlevs <- unique(.data)[!(unique(.data) %in% arg_vals)]
     stop(paste0("Not all non-empty levels in factor are covered: ",
                 paste0(missedlevs, collapse = ", ")))
   }
   if (!all(levels(.data) %in% arg_vals)) {
-    warning("An empty level has been removed")
-    new_factor<-factor(new_factor)
+    emptylevs <- levels(.data)[!(levels(.data) %in% arg_vals)]
+    warning(paste0("Empty levels removed: ",
+                   paste0(emptylevs, collapse = ", ")))
   }
   # for levels(x) <- ... it's: c(old_val = new_val, ...)
-  levels(new_factor) <- setNames(arg_names_expanded, arg_vals)
+  new_factor <- factor(new_factor)
+  old_order <- match(levels(new_factor),arg_vals)
+  levels(new_factor) <- arg_names_expanded[old_order]
+  new_factor<-factor(new_factor,levels=unique(arg_names_expanded))
+  
+  if (!is.null(contr_f)) {
+    if (!is.function(contr_f)) {
+      stop(paste0("contr_f (", substitute(contr_f), ") is not a function"))
+    }
+    contrast_colnames <- levels(new_factor)[2:length(levels(new_factor))]
+    contrasts(new_factor) <- contr_f(length(levels(new_factor)), ...)
+    colnames(contrasts(new_factor)) <- contrast_colnames
+  }
   return(new_factor)
 }
 
