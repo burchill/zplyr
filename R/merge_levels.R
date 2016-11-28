@@ -9,6 +9,8 @@
 #' \code{levels(my_factor)<-c(old1=new1,old2=new1,old3=new2,old4=new2)},
 #' but \code{merge_factor()} saves typing by letting you type the
 #' inverse--in essence: \code{levels(my_factor)<-list(new1=c(old1,old2),new2=c(old3,old4))}.
+#' This was before I knew that \code{plyr::revalue} or \code{plyr::mapvalues} existed. 
+#' It's still marginally more useful than either of these, however.
 #'
 #'
 #' @param .data the factor you want to respecify
