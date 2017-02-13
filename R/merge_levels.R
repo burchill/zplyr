@@ -9,13 +9,13 @@
 #' \code{levels(my_factor)<-c(old1=new1,old2=new1,old3=new2,old4=new2)},
 #' but \code{merge_factor()} saves typing by letting you type the
 #' inverse--in essence: \code{levels(my_factor)<-list(new1=c(old1,old2),new2=c(old3,old4))}.
-#' This was before I knew that \code{plyr::revalue} or \code{plyr::mapvalues} existed. 
+#' This was before I knew that \code{\link[plyr]{revalue}} or \code{\link[purrr]{mapvalues}} existed.
 #' It's still marginally more useful than either of these, however.
 #'
 #'
 #' @param .data the factor you want to respecify
 #' @param arg_list a list whose names are the new levels, whose values are the old levels, and whose order is the new order of the levels
-#' @param contr_f Optional function to determine contrast code. I.e., \code{contr.sum}, or \code{contr.helmert}, etc. If unused, \code{merge_factor} won't touch the contrast coding. Automatically names contrasts as would appear by default. 
+#' @param contr_f Optional function to determine contrast code. I.e., \code{contr.sum}, or \code{contr.helmert}, etc. If unused, \code{merge_factor} won't touch the contrast coding. Automatically names contrasts as would appear by default.
 #' @param \dots Optional arguments to pass in to \code{contr_f}
 #' @return a factor with levels and values as you specified
 #' @examples
@@ -24,7 +24,7 @@
 #' merge_factor(my_factor, list("CIsFirst"="c","AandB"=c("a","b"),"d"))
 #'
 #' # Demonstrates how contrasts are named by default
-#' merged_factor <- merge_factor(my_factor, 
+#' merged_factor <- merge_factor(my_factor,
 #'                               list("CIsFirst"="c","AandB"=c("a","b"),"d"),
 #'                               contr.helmert)
 #' merged_factor
@@ -68,7 +68,7 @@ merge_factor <- function(.data, arg_list, contr_f=NULL, ...) {
   old_order <- match(levels(new_factor),arg_vals)
   levels(new_factor) <- arg_names_expanded[old_order]
   new_factor<-factor(new_factor,levels=unique(arg_names_expanded))
-  
+
   if (!is.null(contr_f)) {
     if (!is.function(contr_f)) {
       stop(paste0("contr_f (", substitute(contr_f), ") is not a function"))
