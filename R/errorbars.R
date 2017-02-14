@@ -50,6 +50,6 @@ dots_and_bars <-function(gg_obj,
                    dotsize = dotsize,
                    alpha=alpha,
                    ...)
-    )
-  )
+    ),
+    ...)
 }
