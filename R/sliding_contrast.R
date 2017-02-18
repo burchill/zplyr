@@ -1,7 +1,8 @@
 #' Sliding contrast/Backward Difference coding
 #'
-#' Called 'sliding contrast coding' or 'backward difference coding', this factor
-#' coding scheme compares the mean of the dependent variable on one level to the mean
+#' Similiar to the base contrast functions (e.g., \code{\link[stats]{contr.sum}}),
+#' this coding scheme is known as 'sliding contrast coding' or 'backward difference coding'.
+#' This factor coding scheme compares the mean of the dependent variable on one level to the mean
 #' of the previous level. This function with return a matrix of contrasts that follow this scheme.
 #'
 #' @param n a vector of levels for a factor, or the number of levels.
