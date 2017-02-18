@@ -7,7 +7,7 @@
 #'
 #' @param n a vector of levels for a factor, or the number of levels.
 #' @param contrasts a logical indicating whether contrasts should be computed.
-#' @param sparse logical indicating if the result should be sparse (of class \code{\link[Matrix]{`dgCMatrix-class`}}), using package \pkg{Matrix}.
+#' @param sparse logical indicating if the result should be sparse (of class \code{\link[Matrix]{dgCMatrix-class}}), using package \pkg{Matrix}.
 #'
 #' @examples
 #' n<-1000
