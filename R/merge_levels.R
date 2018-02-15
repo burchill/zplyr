@@ -1,23 +1,23 @@
 #' Combine/rename/reorder levels in a factor
 #'
-#' Instead of using  \code{ifelse} statements to combine values in a factor
+#' Instead of using \code{ifelse} statements to combine values in a factor
 #' (e.g. when you want to simplify variables for a model), you can rename,
 #' combine, and reorder the levels of a factor with one easy list. If there's an empty
 #' level that isn't included, \code{merge_factor} will warn you, but go ahead and remove it.
 #'
 #' The same effect \strong{could} be achieved with something like:
-#' \code{levels(my_factor)<-c(old1=new1,old2=new1,old3=new2,old4=new2)},
+#' \code{levels(my_factor) <- c(old1=new1,old2=new1,old3=new2,old4=new2)},
 #' but \code{merge_factor()} saves typing by letting you type the
-#' inverse--in essence: \code{levels(my_factor)<-list(new1=c(old1,old2),new2=c(old3,old4))}.
+#' inverse--in essence: \code{levels(my_factor) <- list(new1=c(old1,old2),new2=c(old3,old4))}.
 #' This was before I knew that \code{\link[plyr]{revalue}} or \code{\link[purrr]{mapvalues}} existed.
-#' It's still marginally more useful than either of these, however.
+#' It's still marginally more useful than either of these in my opinion, however.
 #'
 #'
-#' @param .data the factor you want to respecify
-#' @param arg_list a list whose names are the new levels, whose values are the old levels, and whose order is the new order of the levels
+#' @param .data The factor you want to respecify.
+#' @param arg_list A list whose names are the new levels, whose values are the old levels, and whose order is the new order of the levels.
 #' @param contr_f Optional function to determine contrast code. I.e., \code{contr.sum}, or \code{contr.helmert}, etc. If unused, \code{merge_factor} won't touch the contrast coding. Automatically names contrasts as would appear by default.
-#' @param \dots Optional arguments to pass in to \code{contr_f}
-#' @return a factor with levels and values as you specified
+#' @param \dots Optional arguments to pass in to \code{contr_f}.
+#' @return A factor with levels and values as you specified.
 #' @examples
 #' my_factor <- factor(c("d","b","c","d","a","a","d","d"))
 #' levels(my_factor)
@@ -88,9 +88,9 @@ merge_factor <- function(.data, arg_list, contr_f=NULL, ...) {
 #' Instead of taking a list of arguments as input, it takes named values.
 #' The old levels that aren't altered stay put order-wise, and the new ones are swapped in to where their old levels were, as much as possible.
 #'
-#' @param .data the factor you want to re-specify
-#' @param \dots values that must be named, where the name corresponds to the new level and the value corresponds to the old level. The values can be strings, numbers, of vectors of those.
-#' @return a factor
+#' @param .data The factor you want to re-specify.
+#' @param \dots Values that must be named, where the name corresponds to the new level and the value corresponds to the old level. The values can be strings, numbers, of vectors of those.
+#' @return a factor with levels and values as you specified, with those unspecified not changing.
 #' @examples
 #' my_factor <- factor(c("d","b","c","d","a","a"))
 #' levels(my_factor)

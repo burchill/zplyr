@@ -7,18 +7,18 @@
 share_discrete_scales(gg_obj, geom_func_list, ...)
 }
 \arguments{
-\item{gg_obj}{the ggplot object}
+\item{gg_obj}{The ggplot object}
 
-\item{geom_funcs}{a vector or list of \code{ggplot} functions, e.g., \code{c(scale_color_discrete, scale_fill_discrete)}}
+\item{geom_funcs}{A vector or list of \code{ggplot} functions, e.g., \code{c(scale_color_discrete, scale_fill_discrete)}}
 
-\item{\dots}{whatever arguments you want passed to these functions}
+\item{\dots}{Whatever arguments you want passed to these functions}
 }
 \description{
 Often it is the case that one wishes to pass identical arguments to
 multiple functions in \code{ggplot}.  For example, if one wants to scale
 both \code{color} and \code{fill} with the same breaks and legend names/labels. \cr
 The function \code{share_discrete_scales} lets you send identical arguments to a list of \code{ggplot} functions you
-specify.  Not that you need to pipe the ggplot object into this function. If you don't put
+specify.  Note that you need to pipe the ggplot object into this function. If you don't put
 this function immediately after invoking \code{ggplot(\dots)}, the preceding objects should be added to the
 \code{ggplot} object with \code{\%+\%} instead of \code{+}.
 }

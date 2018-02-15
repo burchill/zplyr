@@ -7,25 +7,37 @@
 collect_all(expr, catchErrors = FALSE)
 }
 \arguments{
-\item{expr}{the expression you want to catch warnings and messages for}
+\item{expr}{The expression you want to catch warnings and messages for.}
 
-\item{catchErrors}{a boolean that, if true, will catch error messages just like it catches warnings and messages. It will then return \code{NA} as the value. I generally would not recommend using this, because I understood how this worked the least.}
+\item{catchErrors}{A boolean that, if true, will catch error messages just like it catches warnings and messages. It will then return \code{NA} as the value. I generally would not recommend using this, because I understood how this worked the least.}
 }
 \value{
-a named list with the result of the expression, the warnings, and the messages raised by
+A named list with the result of the expression, the warnings, and the messages raised by
 the expression
 }
 \description{
-\code{collect_all} wraps expressions and returns the result of the expression,
-and lists for warnings, errors, and messages by the expression,
+\code{collect_all} wraps expressions and returns the result of the expression along with
+a list of warnings, errors, and messages raised by running the expression,
 without having to run the expression more than once.
 }
 \details{
 I've personally found R's warning and message handling very confusing, and this represents "good enough" code for me.
-Using Aaron's answer to a question on stackexchange (http://stackoverflow.com/questions/3903157/),
-I was able to understand enough to make a function that would collect all the warnings and messages
-raised by an expression and still run the code only once. If, say, you're running a lot of models
+Using \href{http://stackoverflow.com/questions/3903157/}{Aaron's answer to a question on stackexchange},
+I was able to understand enough of it to make a function that would collect all the warnings and messages
+raised by an expression and still run the code only once. (All other examples I encountered seemed to need to run
+the code twice to get both the result and the warnings.) \cr
+If, say, you're running a lot of models
 all at once, then having to rerun the code (as most tutorials/answers to warning handling with R suggest)
 would be a total pain in the butt.
+}
+\examples{
+# Let's say that `run_model_once(x)` fits a randomly generated glmer model with
+#   a seed of `x`, as one might do in a power simulation
+results = data.frame(IterationNumber = seq(NUMBER_ITERATIONS))
+results = results \%>\%
+  dplyr::tbl_df() \%>\%
+  dplyr::mutate(models = purrr::map(IterationNumber,
+   ~zplyr::collect_all(run_model_once(.))))
+
 }
 

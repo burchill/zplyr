@@ -7,12 +7,12 @@
 merge_levels(.data, ...)
 }
 \arguments{
-\item{.data}{the factor you want to re-specify}
+\item{.data}{The factor you want to re-specify.}
 
-\item{\dots}{values that must be named, where the name corresponds to the new level and the value corresponds to the old level. The values can be strings, numbers, of vectors of those.}
+\item{\dots}{Values that must be named, where the name corresponds to the new level and the value corresponds to the old level. The values can be strings, numbers, of vectors of those.}
 }
 \value{
-a factor
+a factor with levels and values as you specified, with those unspecified not changing.
 }
 \description{
 Similar to \code{merge_factor()} but generally reserved for situations

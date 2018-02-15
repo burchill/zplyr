@@ -4,13 +4,13 @@
 #' multiple functions in \code{ggplot}.  For example, if one wants to scale
 #' both \code{color} and \code{fill} with the same breaks and legend names/labels. \cr
 #' The function \code{share_discrete_scales} lets you send identical arguments to a list of \code{ggplot} functions you
-#' specify.  Not that you need to pipe the ggplot object into this function. If you don't put
+#' specify.  Note that you need to pipe the ggplot object into this function. If you don't put
 #' this function immediately after invoking \code{ggplot(\dots)}, the preceding objects should be added to the
 #' \code{ggplot} object with \code{\%+\%} instead of \code{+}.
 #'
-#' @param gg_obj the ggplot object
-#' @param geom_funcs a vector or list of \code{ggplot} functions, e.g., \code{c(scale_color_discrete, scale_fill_discrete)}
-#' @param \dots whatever arguments you want passed to these functions
+#' @param gg_obj The ggplot object
+#' @param geom_funcs A vector or list of \code{ggplot} functions, e.g., \code{c(scale_color_discrete, scale_fill_discrete)}
+#' @param \dots Whatever arguments you want passed to these functions
 #' @examples
 #' df <- data.frame(
 #'    x<-rnorm(100),

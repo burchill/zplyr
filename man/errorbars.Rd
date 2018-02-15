@@ -2,19 +2,20 @@
 % Please edit documentation in R/errorbars.R
 \name{errorbars}
 \alias{errorbars}
-\title{Make errorbars with one function}
+\title{Make ggplot errorbars and mean with a single function}
 \usage{
 errorbars(gg_obj, ...)
 }
 \arguments{
-\item{gg_obj}{the ggplot object}
+\item{gg_obj}{The ggplot object (i.e., what is built up from \code{ggplot(\dots)}). If \code{errorbars()} does not immediately follow \code{ggplot(\dots)}, use \code{\%+\%} instead of \code{+} to add the intervening ggplot layers until the ggplot object is piped into the function.}
 
-\item{\dots}{values for the stat_summary}
+\item{\dots}{Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.}
 }
 \description{
-Pipe the ggplot object into this. If not immediately after
-\code{ggplot(\dots)}, use \code{\%+\%} instead of \code{+} to add layers until
-the ggplot object is piped into the function.
+Often, automatically bootstrapped errorbars in \code{ggplot2} are accompanied
+by a dot indicating the mean of the errorbars. Generally, this is done with
+two calls of \code{\link[ggplot2]{stat_summary}}, one for the bars and one
+for the dot.  This function is just a shortcut that will add both.
 }
 \examples{
 ggplot(aes(x = x, y = y)) \%+\%

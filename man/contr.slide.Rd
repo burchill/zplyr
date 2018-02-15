@@ -2,22 +2,23 @@
 % Please edit documentation in R/sliding_contrast.R
 \name{contr.slide}
 \alias{contr.slide}
-\title{Sliding contrast/Backward Difference coding}
+\title{Sliding contrast / backward difference coding}
 \usage{
 contr.slide(n, contrasts = TRUE, sparse = FALSE)
 }
 \arguments{
-\item{n}{a vector of levels for a factor, or the number of levels.}
+\item{n}{A vector of levels for a factor, or the number of levels.}
 
-\item{contrasts}{a logical indicating whether contrasts should be computed.}
+\item{contrasts}{A logical indicating whether contrasts should be computed.}
 
-\item{sparse}{logical indicating if the result should be sparse (of class \code{\link[Matrix]{dgCMatrix-class}}), using package \pkg{Matrix}.}
+\item{sparse}{A logical indicating if the result should be sparse (of class \code{\link[Matrix]{dgCMatrix-class}}), using package \pkg{Matrix}.}
 }
 \description{
 Similiar to the base contrast functions (e.g., \code{\link[stats]{contr.sum}}),
 this coding scheme is known as 'sliding contrast coding' or 'backward difference coding'.
 This factor coding scheme compares the mean of the dependent variable on one level to the mean
 of the previous level. This function with return a matrix of contrasts that follow this scheme.
+Evidently this is similar (if not identical) to the function \code{\link[MASS]{contr.sdif}}.
 }
 \examples{
 n<-1000

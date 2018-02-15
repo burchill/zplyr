@@ -1,13 +1,14 @@
-#' Sliding contrast/Backward Difference coding
+#' Sliding contrast / backward difference coding
 #'
 #' Similiar to the base contrast functions (e.g., \code{\link[stats]{contr.sum}}),
 #' this coding scheme is known as 'sliding contrast coding' or 'backward difference coding'.
 #' This factor coding scheme compares the mean of the dependent variable on one level to the mean
 #' of the previous level. This function with return a matrix of contrasts that follow this scheme.
+#' Evidently this is similar (if not identical) to the function \code{\link[MASS]{contr.sdif}}.
 #'
-#' @param n a vector of levels for a factor, or the number of levels.
-#' @param contrasts a logical indicating whether contrasts should be computed.
-#' @param sparse logical indicating if the result should be sparse (of class \code{\link[Matrix]{dgCMatrix-class}}), using package \pkg{Matrix}.
+#' @param n A vector of levels for a factor, or the number of levels.
+#' @param contrasts A logical indicating whether contrasts should be computed.
+#' @param sparse A logical indicating if the result should be sparse (of class \code{\link[Matrix]{dgCMatrix-class}}), using package \pkg{Matrix}.
 #'
 #' @examples
 #' n<-1000

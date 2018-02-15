@@ -2,18 +2,20 @@
 % Please edit documentation in R/errorbars.R
 \name{dots_and_bars}
 \alias{dots_and_bars}
-\title{Make dotplots with errorbars with one function}
+\title{Make dotplots with errorbars with a single function}
 \usage{
 dots_and_bars(gg_obj, binaxis = "y", stackdir = "center", dotsize = 0.5,
   alpha = 0.2, ...)
 }
 \arguments{
-\item{the}{ggplot object}
+\item{gg_obj}{The ggplot object (i.e., what is built up from \code{ggplot(\dots)}). If \code{errorbars()} does not immediately follow \code{ggplot(\dots)}, use \code{\%+\%} instead of \code{+} to add the intervening ggplot layers until the ggplot object is piped into the function.}
 
-\item{\dots}{values for the stat_summary}
+\item{\dots}{Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.}
 }
 \description{
-Pipe the ggplot object into this, if not immediately, uses %+%
+Adds a dotplot, 95\% CI errorbars, and a point representing the mean
+to a ggplot object. Almost identical to \code{\link{errorbars}}, but
+with the obvious additional \code{\link[ggplot2]{geom_dotplot}}. \cr
 Right now, only uses default values for errorbars
 }
 \examples{
