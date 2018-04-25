@@ -9,8 +9,9 @@
 #' \code{ggplot} object with \code{\%+\%} instead of \code{+}.
 #'
 #' @param gg_obj The ggplot object
-#' @param geom_funcs A vector or list of \code{ggplot} functions, e.g., \code{c(scale_color_discrete, scale_fill_discrete)}
-#' @param \dots Whatever arguments you want passed to these functions
+#' @param \dots Unnamed arguments should be \code{ggplot} functions
+#' (e.g., \code{scale_color_discrete}, \code{scale_fill_discrete}, etc.) and
+#' named arguments should be whatever arguments you want passed to these functions
 #' @examples
 #' df <- data.frame(
 #'    x<-rnorm(100),
@@ -25,11 +26,12 @@
 #'                          labels=c("NewName1","NewName2")) +
 #'    xlab("Name")
 #' @export
-share_discrete_scales <- function(gg_obj, geom_func_list, ...) {
-    geoms <- Map(function(f) { f(...) }, geom_func_list)
-    answer <- Reduce(function(a,b) {ggplot2::`%+%`(a,b)},
-                     geoms, init=gg_obj)
-    return(answer)
+share_discrete_scales <- function(gg_obj, ...) {
+  akw <- args_and_kwargs(...)
+  geom_func_list <- purrr::map(akw$args, rlang::eval_tidy)
+  geoms <- purrr::map(geom_func_list, ~quo_to_args(., akw$kwargs))
+  answer <- purrr::reduce(geoms, ggplot2::`%+%`, .init=gg_obj)
+  return(answer)
 }
 
 
