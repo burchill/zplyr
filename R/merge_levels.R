@@ -5,10 +5,11 @@
 #' combine, and reorder the levels of a factor with one easy list. If there's an empty
 #' level that isn't included, \code{merge_factor} will warn you, but go ahead and remove it.
 #'
-#' The same effect \strong{could} be achieved with something like:
-#' \code{levels(my_factor) <- c(old1=new1,old2=new1,old3=new2,old4=new2)},
+#' The same effect \strong{could} be achieved with something like: \cr
+#' \code{levels(my_factor) <- c(old1=new1, old2=new1, old3=new2, old4=new2)}, \cr
 #' but \code{merge_factor()} saves typing by letting you type the
-#' inverse--in essence: \code{levels(my_factor) <- list(new1=c(old1,old2),new2=c(old3,old4))}.
+#' inverse--in essence: \cr
+#' \code{levels(my_factor) <- list(new1=c(old1, old2), new2=c(old3, old4))}. \cr
 #' This was before I knew that \code{\link[plyr]{revalue}} or \code{\link[purrr]{mapvalues}} existed.
 #' It's still marginally more useful than either of these in my opinion, however.
 #'
@@ -19,13 +20,13 @@
 #' @param \dots Optional arguments to pass in to \code{contr_f}.
 #' @return A factor with levels and values as you specified.
 #' @examples
-#' my_factor <- factor(c("d","b","c","d","a","a","d","d"))
+#' my_factor <- factor(c("d", "b", "c", "d", "a", "a", "d", "d"))
 #' levels(my_factor)
-#' merge_factor(my_factor, list("CIsFirst"="c","AandB"=c("a","b"),"d"))
+#' merge_factor(my_factor, list("CIsFirst"="c", "AandB"=c("a","b"), "d"))
 #'
 #' # Demonstrates how contrasts are named by default
 #' merged_factor <- merge_factor(my_factor,
-#'                               list("CIsFirst"="c","AandB"=c("a","b"),"d"),
+#'                               list("CIsFirst"="c", "AandB"=c("a", "b"), "d"),
 #'                               contr.helmert)
 #' merged_factor
 #' contrasts(merged_factor)
@@ -92,9 +93,9 @@ merge_factor <- function(.data, arg_list, contr_f=NULL, ...) {
 #' @param \dots Values that must be named, where the name corresponds to the new level and the value corresponds to the old level. The values can be strings, numbers, of vectors of those.
 #' @return a factor with levels and values as you specified, with those unspecified not changing.
 #' @examples
-#' my_factor <- factor(c("d","b","c","d","a","a"))
+#' my_factor <- factor(c("d", "b", "c", "d", "a", "a"))
 #' levels(my_factor)
-#' merge_levels(my_factor,"AandB"=c("a","b"),"RenamedC"="c"))
+#' merge_levels(my_factor, "AandB"=c("a","b"), "RenamedC"="c"))
 #'
 #' @export
 merge_levels <- function(.data, ...) {

@@ -21,9 +21,9 @@ Instead of taking a list of arguments as input, it takes named values.
 The old levels that aren't altered stay put order-wise, and the new ones are swapped in to where their old levels were, as much as possible.
 }
 \examples{
-my_factor <- factor(c("d","b","c","d","a","a"))
+my_factor <- factor(c("d", "b", "c", "d", "a", "a"))
 levels(my_factor)
-merge_levels(my_factor,"AandB"=c("a","b"),"RenamedC"="c"))
+merge_levels(my_factor, "AandB"=c("a","b"), "RenamedC"="c"))
 
 }
 
