@@ -9,13 +9,21 @@ args_and_kwargs(...)
 \arguments{
 \item{\dots}{Whatever mix of named and unnamed arguments you want}
 }
+\value{
+A named list of lists, with `$args` being a list of quosures of the unnamed arguments and `$kwargs` being a list of quosures of the named arguments.
+}
 \description{
 This function will return a named a separated list of named and unnamed arguments
 as quosures.
 }
 \examples{
-# Like how I made `share_scales`
 
+x <- args_and_kwargs(unnamed_1, named_1="ba", "unnamed_2", named_2 = letters)
+print(x$args)
+print(x$kwargs)
+
+
+# Or like how I made `share_scales`
 share_scales <- function(...) {
   akw <- args_and_kwargs(...)
   # Unnamed arguments are ggplot scales
