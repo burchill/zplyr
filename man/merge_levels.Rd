@@ -23,7 +23,7 @@ The old levels that aren't altered stay put order-wise, and the new ones are swa
 \examples{
 my_factor <- factor(c("d", "b", "c", "d", "a", "a"))
 levels(my_factor)
-merge_levels(my_factor, "AandB"=c("a","b"), "RenamedC"="c"))
+merge_levels(my_factor, "AandB"=c("a","b"), "RenamedC"="c")
 
 }
 \seealso{

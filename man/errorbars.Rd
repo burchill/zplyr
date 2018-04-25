@@ -4,12 +4,13 @@
 \alias{errorbars}
 \title{Make ggplot errorbars and mean with a single function}
 \usage{
-errorbars(gg_obj, ...)
+errorbars(...)
 }
 \arguments{
-\item{gg_obj}{The ggplot object (i.e., what is built up from \code{ggplot(\dots)}). If \code{errorbars()} does not immediately follow \code{ggplot(\dots)}, use \code{\%+\%} instead of \code{+} to add the intervening ggplot layers until the ggplot object is piped into the function.}
-
 \item{\dots}{Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.}
+}
+\value{
+A list of the \code{stat_summary} objects
 }
 \description{
 Often, automatically bootstrapped errorbars in \code{ggplot2} are accompanied
@@ -18,10 +19,15 @@ two calls of \code{\link[ggplot2]{stat_summary}}, one for the bars and one
 for the dot.  This function is just a shortcut that will add both.
 }
 \examples{
-ggplot(aes(x = x, y = y)) \%+\%
-   geom_point() \%>\%
-   errorbars() +
-   xlab("WHAAAT")
+df <- data.frame(
+  y<-rnorm(100),
+  x<-factor(c(rep("Label1",50), rep("Label2",50)))
+)
+
+ggplot(df, aes(x = x, y = y)) +
+  geom_point(alpha=0.3) +
+  errorbars(color="red") +
+  xlab("WHAAAT")
 }
 \seealso{
 \code{\link{dots_and_bars}}

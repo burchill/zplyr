@@ -41,7 +41,7 @@ contr.slide <- function (n, contrasts = TRUE, sparse = FALSE)
     }
     else levels <- n
     levels <- as.character(levels)
-    if (contrasts) {
+    if (contrasts==TRUE) {
         n <- length(levels)
         cont <- array(0, c(n, n - 1L), list(levels, NULL))
 

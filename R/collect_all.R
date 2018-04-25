@@ -20,12 +20,12 @@
 #' @examples
 #' # Let's say that `run_model_once(x)` fits a randomly generated glmer model with
 #' #   a seed of `x`, as one might do in a power simulation
-#' results = data.frame(IterationNumber = seq(NUMBER_ITERATIONS))
+#' \dontrun{results = data.frame(IterationNumber = seq(NUMBER_ITERATIONS))
 #' results = results %>%
 #'   dplyr::tbl_df() %>%
 #'   dplyr::mutate(models = purrr::map(IterationNumber,
 #'    ~zplyr::collect_all(run_model_once(.))))
-#'
+#' }
 #' @export
 collect_all <- function(expr, catchErrors=FALSE) {
   myErrors   <- NULL

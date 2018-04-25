@@ -10,7 +10,7 @@ hide_geoms(gg_obj)
 \item{gg_obj}{The \code{ggplot} object whose data you want to hide.}
 }
 \value{
-a \code{\link[Matrix]{gtable}} object (which you can plot)
+a \code{\link[gtable]{gtable}} object (which you can plot)
 }
 \description{
 Hides all the geoms on the graph while keeping everything else (e.g.,

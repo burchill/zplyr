@@ -9,7 +9,7 @@ share_discrete_scales(gg_obj, geom_func_list, ...)
 \arguments{
 \item{gg_obj}{The ggplot object}
 
-\item{geom_funcs}{A vector or list of \code{ggplot} functions, e.g., \code{c(scale_color_discrete, scale_fill_discrete)}}
+\item{geom_func_list}{A vector or list of \code{ggplot} functions, e.g., \code{c(scale_color_discrete, scale_fill_discrete)}}
 
 \item{\dots}{Whatever arguments you want passed to these functions}
 }

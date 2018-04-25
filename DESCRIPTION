@@ -4,12 +4,14 @@ Title: Zach Burchill's Personal Functions
 Version: 0.2.0
 Author: Zachary Burchill
 Maintainer: Zach <nah@toobusy.com>
-Description: A collection of functions that I find helpful across projects
+Description: A collection of functions that I find helpful across projects.
 License: GNU GENERAL PUBLIC LICENSE
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:
-    dplyr   (>= 0.7.0),
-    purrr   (>= 0.2.0),
-    rlang   (>= 0.2.0),
-    ggplot2 (>= 2.2.0)
+    dplyr    (>= 0.7.0),
+    magrittr,
+    lazyeval (>= 0.2.0),
+    purrr    (>= 0.2.0),
+    rlang    (>= 0.2.0),
+    ggplot2  (>= 2.2.0)

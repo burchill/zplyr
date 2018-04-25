@@ -8,6 +8,16 @@ zummarise(.data, ...)
 }
 \arguments{
 \item{.data}{A tbl. I believe that all main verbs are S3 generics and provide methods for \code{\link[dplyr]{tbl_df}}, \code{\link[dplyr]{tbl_dt}}, and \code{\link[dplyr]{tbl_sql}} since this is built on \code{dplyr} code.}
+
+\item{...}{From \code{dplyr}: Name-value pairs of summary functions. The name will be the
+  name of the variable in the result. The value should be an expression
+  that returns a single value like `min(x)`, `n()`, or `sum(is.na(y))`.
+
+  These arguments are automatically [quoted][rlang::quo] and
+  [evaluated][rlang::eval_tidy] in the context of the data
+  frame. They support [unquoting][rlang::quasiquotation] and
+  splicing. See `vignette("programming")` for an introduction to
+  these concepts.}
 }
 \value{
 An object of the same class as \code{.data}. \strong{All} grouping levels will be dropped. \cr \cr

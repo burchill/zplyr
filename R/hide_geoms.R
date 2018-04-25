@@ -4,14 +4,14 @@
 #' the scaling, the legends, the titles, etc.) the same. \cr
 #' Useful for when, in a talk, you want to explain to the audience what
 #' they are about to see, while acquainting them with the legends, etc.
-#' 
+#'
 #' Currently, this just goes through each layer of data and sets the
 #' \code{size} and \code{alpha} to 0. This hasn't been tested at edge cases.
 #'
 #' @param gg_obj The \code{ggplot} object whose data you want to hide.
-#' @return a \code{\link[Matrix]{gtable}} object (which you can plot)
+#' @return a \code{\link[gtable]{gtable}} object (which you can plot)
 #' @examples
-#' 
+#'
 #' a <- tibble(
 #'   alp=runif(120,0,3),
 #'   bet=alp*2+1,
@@ -33,7 +33,7 @@
 hide_geoms <- function(gg_obj) {
   plot_data <- ggplot2::ggplot_build(gg_obj)
   data_list = plot_data$data %>%
-    purrr::map(. %>% mutate(size=0,alpha=0))
+    purrr::map(. %>% dplyr::mutate(size=0,alpha=0))
   plot_data$data <- data_list
   return(ggplot2::ggplot_gtable(plot_data))
 }

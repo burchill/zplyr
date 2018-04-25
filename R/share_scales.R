@@ -45,7 +45,7 @@ share_scales <- function(...) {
 #' \code{ggplot} object with \code{\%+\%} instead of \code{+}.
 #'
 #' @param gg_obj The ggplot object
-#' @param geom_funcs A vector or list of \code{ggplot} functions, e.g., \code{c(scale_color_discrete, scale_fill_discrete)}
+#' @param geom_func_list A vector or list of \code{ggplot} functions, e.g., \code{c(scale_color_discrete, scale_fill_discrete)}
 #' @param \dots Whatever arguments you want passed to these functions
 #' @examples
 #' df <- data.frame(
