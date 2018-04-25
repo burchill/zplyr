@@ -24,4 +24,7 @@ ggplot(aes(x=x,y=y)) \%+\%
    dots_and_bars() +
    xlab("WHAAAT")
 }
+\seealso{
+\code{\link{errorbars}}
+}
 

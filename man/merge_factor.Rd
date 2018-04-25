@@ -45,6 +45,8 @@ merged_factor <- merge_factor(my_factor,
 merged_factor
 contrasts(merged_factor)
 
-
+}
+\seealso{
+\code{\link{merge_levels}}
 }
 

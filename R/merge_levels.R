@@ -31,7 +31,7 @@
 #' merged_factor
 #' contrasts(merged_factor)
 #'
-#'
+#' @seealso \code{\link{merge_levels}}
 #' @export
 merge_factor <- function(.data, arg_list, contr_f=NULL, ...) {
   arg_names <- names(arg_list)
@@ -97,6 +97,7 @@ merge_factor <- function(.data, arg_list, contr_f=NULL, ...) {
 #' levels(my_factor)
 #' merge_levels(my_factor, "AandB"=c("a","b"), "RenamedC"="c"))
 #'
+#' @seealso \code{\link{merge_factor}}
 #' @export
 merge_levels <- function(.data, ...) {
   arg_list <- list(...)

@@ -12,6 +12,7 @@
 #'    geom_point() %>%
 #'    errorbars() +
 #'    xlab("WHAAAT")
+#' @seealso \code{\link{dots_and_bars}}
 #' @export
 errorbars <- function(gg_obj, ...) {
   ggplot2::`%+%`(
@@ -38,6 +39,7 @@ errorbars <- function(gg_obj, ...) {
 #'    geom_point() %>%
 #'    dots_and_bars() +
 #'    xlab("WHAAAT")
+#' @seealso \code{\link{errorbars}}
 #' @export
 dots_and_bars <-function(gg_obj,
                         binaxis = "y",
