@@ -2,7 +2,7 @@
 % Please edit documentation in R/kwargs.R
 \name{args_and_kwargs}
 \alias{args_and_kwargs}
-\title{Does Python-esque \code{*args, **kwargs} argument separation}
+\title{Separate \dots into Python-esque \code{*args} and \code{**kwargs}}
 \usage{
 args_and_kwargs(...)
 }
@@ -14,16 +14,15 @@ This function will return a named a separated list of named and unnamed argument
 as quosures.
 }
 \examples{
-# Like how I made `share_discrete_scales`
+# Like how I made `share_scales`
 
-share_discrete_scales <- function(gg_obj, ...) {
+share_scales <- function(...) {
   akw <- args_and_kwargs(...)
-  # unnamed arguments are ggplot scale functions
+  # Unnamed arguments are ggplot scales
   geom_func_list <- purrr::map(akw$args, rlang::eval_tidy)
-  # named args are to be passed into these functions
+  # Named arguments are to be passed into those scales
   geoms <- purrr::map(geom_func_list, ~quo_to_args(., akw$kwargs))
-  answer <- purrr::reduce(geoms, ggplot2::`\%+\%`, .init=gg_obj)
-  return(answer)
+  return(geoms)
 }
 }
 
