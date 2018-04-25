@@ -2,35 +2,28 @@
 % Please edit documentation in R/errorbars.R
 \name{dots_and_bars}
 \alias{dots_and_bars}
-\title{Make dotplots with errorbars with a single function}
+\title{(Deprecated)Make dotplots with errorbars with a single function}
 \usage{
-dots_and_bars(..., binaxis = "y", stackdir = "center", dotsize = 0.5,
-  alpha = 0.2)
+dots_and_bars(gg_obj, binaxis = "y", stackdir = "center", dotsize = 0.5,
+  alpha = 0.2, ...)
 }
 \arguments{
+\item{gg_obj}{The ggplot object (i.e., what is built up from \code{ggplot(\dots)}). If \code{errorbars()} does not immediately follow \code{ggplot(\dots)}, use \code{\%+\%} instead of \code{+} to add the intervening ggplot layers until the ggplot object is piped into the function.}
+
 \item{\dots}{Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.}
 }
-\value{
-A list of the \code{stat_summary} objects
-}
 \description{
+\strong{Deprecated! Use \code{\link{geom_dots_and_bars}} instead!} \cr
 Adds a dotplot, 95\% CI errorbars, and a point representing the mean
 to a ggplot object. Almost identical to \code{\link{errorbars}}, but
 with the obvious additional \code{\link[ggplot2]{geom_dotplot}}. \cr
 Right now, only uses default values for errorbars
 }
 \examples{
-df <- data.frame(
-  y<-rnorm(100),
-  x<-factor(c(rep("Label1",50), rep("Label2",50)))
-)
-
-ggplot(df, aes(x = x, y = y)) +
-  geom_point(alpha=0.3) +
-  dots_and_bars(color="red") +
-  xlab("WHAAAT")
+\dontrun{ggplot(df, aes(x=x,y=y)) \%+\%
+   geom_point() \%>\%
+   dots_and_bars() +
+   xlab("WHAAAT")
 }
-\seealso{
-\code{\link{errorbars}}
 }
 
