@@ -27,12 +27,17 @@ df <- data.frame(
    f<-c(rep("Label1",50), rep("Label2",50))
 )
 
-ggplot(df, aes(x = x, color=f, fill=f)) +
-   geom_histogram() +
-   share_scales(scale_color_discrete, scale_fill_discrete,
-                         name="Legend Label!",
-                         breaks=c("Label1","Label2"),
-                         labels=c("NewName1","NewName2")) +
-   xlab("Name")
+l <- c(1,2,3,4,5,6)
+df <- data.frame(x = rgamma(100, 2, 2),
+                 y = factor(sample(l, size=100, replace = TRUE)))
+
+  ggplot(df, aes(x=x, y=y, size=y, color=y, fill=y, shape=y)) +
+  geom_point() +
+  # Zplyr function
+  share_scales(scale_color_discrete,  scale_size_discrete, 
+               scale_fill_discrete, scale_shape_discrete,
+               name="Legend Label!",
+               breaks=c(1,2,3,4,5,6),
+               labels=c("uno","dos","tres","catorce","FIVE","siiiiiix"))
 }
 

@@ -25,8 +25,8 @@ this function immediately after invoking \code{ggplot(\dots)}, the preceding obj
 }
 \examples{
 df <- data.frame(
-   x<-rnorm(100),
-   f<-c(rep("Label1",50), rep("Label2",50))
+   x=rnorm(100),
+   f=c(rep("Label1",50), rep("Label2",50))
 )
 
 ggplot(df, aes(x = x, color=f, fill=f)) \%+\%
