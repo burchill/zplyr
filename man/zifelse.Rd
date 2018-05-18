@@ -13,7 +13,7 @@ zifelse(...)
 A vector of the same length as the logical vector that is the first argument
 }
 \description{
-\emph{USE \code{dplyr}'s \code{\link[dplyr]{case_when}} for actual code!} This function is just code for my (Zach Burchill's) personal
+\emph{USE \code{dplyr}'s \code{\link[dplyr]{case_when}} FOR ACTUAL WORKING CODE!} This function is just code for my (Zach Burchill's) personal
 reference in the future. I anticipate that the framework that I wrote here for might be useful for me in the future.
 }
 \examples{

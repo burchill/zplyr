@@ -1,6 +1,6 @@
 #' Nested `ifelse` statements with less typing
 #'
-#' \emph{USE \code{dplyr}'s \code{\link[dplyr]{case_when}} for actual code!} This function is just code for my (Zach Burchill's) personal
+#' \emph{USE \code{dplyr}'s \code{\link[dplyr]{case_when}} FOR ACTUAL WORKING CODE!} This function is just code for my (Zach Burchill's) personal
 #' reference in the future. I anticipate that the framework that I wrote here for might be useful for me in the future.
 #'
 #' @param \dots Paired unnamed arguments, where the first in each pair is an expression that evaluates to a logical vector, and the second is the replacement value. The last argument needs to be a single, unpaired default replacement value.
@@ -38,37 +38,39 @@ zifelse <- function(...) {
 
 
 
-# This approach doesn't actually work right, since it can't distinguish between
+# The approach below doesn't actually work as a good pseudo-replacement for `switch()`, since it can't distinguish between
 #   `s="X"` -> `.x==s, "X"` and `"s"="X"` -!-> `.x=="s", "X"`
-# I like the named vs. unnamed approach though. Maybe it could work if I switched what the name and the value represented, e.g., `"mean(x)"=s` vs. `"mean(x)"="s"`.
+#   (technically, I don't think `switch` can do this either, but it would get annoying to use within tidyverse functions either way, so I'm not pushing it)
+# But I like the named vs. unnamed approach though, so I'm keeping it in. Maybe it could work if I switched what the name and the value represented, e.g., `"mean(x)"=s` vs. `"mean(x)"="s"`.
 # Nah, that wouldn't really solve the problem. I guess I could just require something like `"\"s\""="X"` but at that point...
-zwitch <- function(.x, ...) {
-  .x_expr <- rlang::enquo(.x) 
-  print(enquos(...))
-  
-  a <- zplyr::args_and_kwargs(...) # separate args
-  
-  if (is.null(a$kwargs)) stop("Dots need to be named arguments!")
-  
-  # We only use one unnamed argument, and that's the default value
-  # If there are more than one unnamed argument, we use the first one and give a warning
-  if (!is.null(a$args) & length(a$args) > 1) {
-    warning(paste0("Not using the following arguments: ",
-                   paste0(purrr::map(a$args[2:length(a$args)], rlang::quo_text),
-                          collapse = ", ")))
-  }
-  
-  begin <- purrr::imap(a$kwargs,
-                       ~paste0("ifelse(", rlang::quo_text(.x_expr),  
-                               "==", .y, ", ", rlang::quo_text(.x), ", ")) %>% 
-    unname() %>%
-    purrr::reduce(paste0)
-  
-  end <- paste0(rlang::quo_text(a$args[[1]]), 
-                paste0(rep(")",length(a$kwargs)), collapse = ""))
-  
-  q <- rlang::parse_quosure(paste0(begin,end))
-  q <- rlang::quo_set_env(q, rlang::get_env(.x_expr))
-  return(rlang::eval_tidy(q))
-}
+
+# zwitch <- function(.x, ...) {
+#   .x_expr <- rlang::enquo(.x) 
+#   print(enquos(...))
+#   
+#   a <- zplyr::args_and_kwargs(...) # separate args
+#   
+#   if (is.null(a$kwargs)) stop("Dots need to be named arguments!")
+#   
+#   # We only use one unnamed argument, and that's the default value
+#   # If there are more than one unnamed argument, we use the first one and give a warning
+#   if (!is.null(a$args) & length(a$args) > 1) {
+#     warning(paste0("Not using the following arguments: ",
+#                    paste0(purrr::map(a$args[2:length(a$args)], rlang::quo_text),
+#                           collapse = ", ")))
+#   }
+#   
+#   begin <- purrr::imap(a$kwargs,
+#                        ~paste0("ifelse(", rlang::quo_text(.x_expr),  
+#                                "==", .y, ", ", rlang::quo_text(.x), ", ")) %>% 
+#     unname() %>%
+#     purrr::reduce(paste0)
+#   
+#   end <- paste0(rlang::quo_text(a$args[[1]]), 
+#                 paste0(rep(")",length(a$kwargs)), collapse = ""))
+#   
+#   q <- rlang::parse_quosure(paste0(begin,end))
+#   q <- rlang::quo_set_env(q, rlang::get_env(.x_expr))
+#   return(rlang::eval_tidy(q))
+# }
 
