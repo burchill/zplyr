@@ -7,7 +7,8 @@ Maintainer: Zach <nah@toobusy.com>
 Description: A collection of functions that I find helpful across projects.
 License: GNU GENERAL PUBLIC LICENSE
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)
 Imports:
     dplyr    (>= 0.7.0),
     magrittr,

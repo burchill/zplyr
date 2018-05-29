@@ -1,6 +1,6 @@
 #' Print within pipes
 #'
-#' This function can be placed within a sequence of `%>%` pipes for debugging purposes.
+#' This function can be placed within a sequence of \code{\%>\%} pipes for debugging purposes.
 #' It will literally print the output of the function you specify on whatever was passed into it, and then pass it out, untouched.  If you want to just print a string with no bearing on whatever is being piped, then set the `.text` variable to that string.
 #'
 #' @param .x Whatever is being piped down the pipeline

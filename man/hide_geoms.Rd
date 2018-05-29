@@ -42,4 +42,3 @@ plot(hide_data(g))
 
 
 }
-

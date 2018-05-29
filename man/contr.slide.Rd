@@ -42,4 +42,3 @@ contrasts(df$fac) <- contr.slide(4)/4
 summary(lm(y~fac,data=df))
 
 }
-

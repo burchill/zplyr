@@ -49,4 +49,3 @@ contrasts(merged_factor)
 \seealso{
 \code{\link{merge_levels}}
 }
-

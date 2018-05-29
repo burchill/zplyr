@@ -10,7 +10,7 @@ args_and_kwargs(...)
 \item{\dots}{Whatever mix of named and unnamed arguments you want}
 }
 \value{
-A named list of lists, with `$args` being a list of quosures of the unnamed arguments and `$kwargs` being a list of quosures of the named arguments.
+A named list of lists, with \code{$args} being a list of quosures of the unnamed arguments and \code{$kwargs} being a list of quosures of the named arguments.
 }
 \description{
 This function will return a named a separated list of named and unnamed arguments
@@ -33,4 +33,3 @@ share_scales <- function(...) {
   return(geoms)
 }
 }
-

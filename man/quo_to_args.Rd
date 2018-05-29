@@ -28,4 +28,3 @@ quo_to_args(f, quos(y=3+3, x=3))
 m <- function(x, y, ...) paste0(x," ",y)
 quo_to_args(m, quos(y="World", "HAHAHHA", x="Hello"))
 }
-

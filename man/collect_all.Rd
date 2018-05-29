@@ -40,4 +40,3 @@ results = results \%>\%
    ~zplyr::collect_all(run_model_once(.))))
 }
 }
-

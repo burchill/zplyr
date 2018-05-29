@@ -29,4 +29,3 @@ merge_levels(my_factor, "AandB"=c("a","b"), "RenamedC"="c")
 \seealso{
 \code{\link{merge_factor}}
 }
-

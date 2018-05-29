@@ -40,4 +40,3 @@ ggplot(df, aes(x = x, color=f, fill=f)) \%+\%
 \seealso{
 \code{\link{share_scales}}
 }
-

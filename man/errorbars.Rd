@@ -26,4 +26,3 @@ ggplot(df, aes(x = x, y = y)) \%+\%
    xlab("WHAAAT")
 }
 }
-

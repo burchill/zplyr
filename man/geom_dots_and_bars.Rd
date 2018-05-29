@@ -32,4 +32,3 @@ ggplot(df, aes(x = x, y = y)) +
 \seealso{
 \code{\link{errorbars}}
 }
-

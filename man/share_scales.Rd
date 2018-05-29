@@ -40,4 +40,3 @@ df <- data.frame(x = rgamma(100, 2, 2),
                breaks=c(1,2,3,4,5,6),
                labels=c("uno","dos","tres","catorce","FIVE","siiiiiix"))
 }
-

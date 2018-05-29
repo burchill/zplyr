@@ -26,4 +26,3 @@ Right now, only uses default values for errorbars
    xlab("WHAAAT")
 }
 }
-

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ifelse-esque.R
 \name{zifelse}
 \alias{zifelse}
-\title{Nested `ifelse` statements with less typing}
+\title{Nested \code{ifelse} statements with less typing}
 \usage{
 zifelse(...)
 }
@@ -23,4 +23,3 @@ zifelse(a >= 0   & a <= 0.33, 1,
         a > 0.33 & a <= 0.66, 2,
         3)
 }
-
