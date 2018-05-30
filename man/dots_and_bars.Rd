@@ -2,7 +2,7 @@
 % Please edit documentation in R/errorbars.R
 \name{dots_and_bars}
 \alias{dots_and_bars}
-\title{(Deprecated)Make dotplots with errorbars with a single function}
+\title{(Deprecated) Make dotplots with error bars with a single function}
 \usage{
 dots_and_bars(gg_obj, binaxis = "y", stackdir = "center", dotsize = 0.5,
   alpha = 0.2, ...)
@@ -13,11 +13,11 @@ dots_and_bars(gg_obj, binaxis = "y", stackdir = "center", dotsize = 0.5,
 \item{\dots}{Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.}
 }
 \description{
-\strong{Deprecated! Use \code{\link{geom_dots_and_bars}} instead!} \cr
-Adds a dotplot, 95\% CI errorbars, and a point representing the mean
+\strong{Deprecated! Use \code{\link{stat_dots_and_bar}} instead!} \cr
+Adds a dotplot, 95\% CI error bars, and a point representing the mean
 to a ggplot object. Almost identical to \code{\link{errorbars}}, but
 with the obvious additional \code{\link[ggplot2]{geom_dotplot}}. \cr
-Right now, only uses default values for errorbars
+Right now, only uses default values for error bars
 }
 \examples{
 \dontrun{ggplot(df, aes(x=x,y=y)) \%+\%

@@ -2,7 +2,7 @@
 % Please edit documentation in R/errorbars.R
 \name{errorbars}
 \alias{errorbars}
-\title{(Deprecated) Make ggplot errorbars and mean with a single function}
+\title{(Deprecated) Make ggplot error bars and mean with a single function}
 \usage{
 errorbars(gg_obj, ...)
 }
@@ -12,8 +12,8 @@ errorbars(gg_obj, ...)
 \item{\dots}{Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.}
 }
 \description{
-\strong{Deprecated! Use \code{\link{geom_errorbars}} instead!} \cr
-Often, automatically bootstrapped errorbars in \code{ggplot2} are accompanied
+\strong{Deprecated! Use \code{\link{stat_errorbar}} instead!} \cr
+Often, automatically bootstrapped error bars in \code{ggplot2} are accompanied
 by a dot indicating the mean of the errorbars. Generally, this is done with
 two calls of \code{\link[ggplot2]{stat_summary}}, one for the bars and one
 for the dot.  This function is just a shortcut that will add both.
