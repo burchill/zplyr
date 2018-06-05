@@ -10,6 +10,14 @@ dots_and_bars(gg_obj, binaxis = "y", stackdir = "center", dotsize = 0.5,
 \arguments{
 \item{gg_obj}{The ggplot object (i.e., what is built up from \code{ggplot(\dots)}). If \code{errorbars()} does not immediately follow \code{ggplot(\dots)}, use \code{\%+\%} instead of \code{+} to add the intervening ggplot layers until the ggplot object is piped into the function.}
 
+\item{binaxis}{Set by default to "y"}
+
+\item{stackdir}{Set by default to "center"}
+
+\item{dotsize}{Set by default to 0.5}
+
+\item{alpha}{Set by default to 0.2}
+
 \item{\dots}{Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.}
 }
 \description{

@@ -57,6 +57,10 @@ geom_errorbars <- function(...) {
 #' more sense to change its name.
 #'
 #' @param \dots Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.
+#' @param binaxis Set by default to "y"
+#' @param stackdir Set by default to "center"
+#' @param dotsize Set by default to 0.5
+#' @param alpha Set by default to 0.2
 #' @return A list of the \code{stat_summary} objects
 #' @examples
 #' df <- data.frame(

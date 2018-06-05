@@ -13,6 +13,14 @@ geom_dots_and_bars(..., binaxis = "y", stackdir = "center", dotsize = 0.5,
 }
 \arguments{
 \item{\dots}{Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.}
+
+\item{binaxis}{Set by default to "y"}
+
+\item{stackdir}{Set by default to "center"}
+
+\item{dotsize}{Set by default to 0.5}
+
+\item{alpha}{Set by default to 0.2}
 }
 \value{
 A list of the \code{stat_summary} objects

@@ -53,6 +53,7 @@ share_scales <- function(...) {
 #' @param geom_func_list A vector or list of \code{ggplot} functions, e.g., \code{c(scale_color_discrete, scale_fill_discrete)}
 #' @param \dots Whatever arguments you want passed to these functions
 #' @examples
+#' \dontrun{
 #' df <- data.frame(
 #'    x=rnorm(100),
 #'    f=c(rep("Label1",50), rep("Label2",50))
@@ -65,6 +66,7 @@ share_scales <- function(...) {
 #'                          breaks=c("Label1","Label2"),
 #'                          labels=c("NewName1","NewName2")) +
 #'    xlab("Name")
+#' }
 #' @seealso \code{\link{share_scales}}
 #' @export
 share_discrete_scales <- function(gg_obj, geom_func_list, ...) {

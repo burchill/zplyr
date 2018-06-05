@@ -6,7 +6,7 @@
 #' doing what I wanted it to, I created this function as a way of implementing what
 #' I thought \code{\link[dplyr]{summarise}} actually did
 #'
-#' @param .data A tbl. I believe that all main verbs are S3 generics and provide methods for \code{\link[dplyr]{tbl_df}}, \code{\link[dplyr]{tbl_dt}}, and \code{\link[dplyr]{tbl_sql}} since this is built on \code{dplyr} code.
+#' @param .data A tbl. I believe that all main verbs are S3 generics and provide methods for \code{\link[dplyr]{tbl_df}}, etc., since this is built on \code{dplyr} code.
 #' @param ... From \code{dplyr}: Name-value pairs of summary functions. The name will be the
 #'   name of the variable in the result. The value should be an expression
 #'   that returns a single value like `min(x)`, `n()`, or `sum(is.na(y))`.

@@ -19,8 +19,6 @@
 #' })
 #' ```
 #' In order to disable this behavior for specific chunks, just put `regFloat=TRUE` as a chunk option.
-#'
-#'
-#' @docType note
+#' 
 #' @name stop_floating_in_latex
 NULL

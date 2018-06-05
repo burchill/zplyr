@@ -30,8 +30,8 @@ The same effect \strong{could} be achieved with something like: \cr
 but \code{merge_factor()} saves typing by letting you type the
 inverse--in essence: \cr
 \code{levels(my_factor) <- list(new1=c(old1, old2), new2=c(old3, old4))}. \cr
-This was before I knew that \code{\link[plyr]{revalue}} or \code{\link[purrr]{mapvalues}} existed.
-It's still marginally more useful than either of these in my opinion, however.
+This was before I knew about \code{\link[plyr]{revalue}} or \code{purrr}'s \code{mapvalues}
+(which no longer exists). It's still marginally more useful than either of these in my opinion, however.
 }
 \examples{
 my_factor <- factor(c("d", "b", "c", "d", "a", "a", "d", "d"))

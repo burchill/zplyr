@@ -24,6 +24,7 @@ this function immediately after invoking \code{ggplot(\dots)}, the preceding obj
 \code{ggplot} object with \code{\%+\%} instead of \code{+}.
 }
 \examples{
+\dontrun{
 df <- data.frame(
    x=rnorm(100),
    f=c(rep("Label1",50), rep("Label2",50))
@@ -36,6 +37,7 @@ ggplot(df, aes(x = x, color=f, fill=f)) \%+\%
                          breaks=c("Label1","Label2"),
                          labels=c("NewName1","NewName2")) +
    xlab("Name")
+}
 }
 \seealso{
 \code{\link{share_scales}}

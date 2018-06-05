@@ -51,8 +51,8 @@ contr.slide <- function (n, contrasts = TRUE, sparse = FALSE)
                                                           function(x) {rep(n-x,x)}))
         colnames(cont) <- NULL
         if (sparse)
-            stats:::.asSparse(cont)
+           get(".asSparse", envir = asNamespace("stats"), inherits = FALSE)(cont)
         else cont
     }
-    else stats:::.Diag(levels, sparse = sparse)
+    else get(".Diag", envir = asNamespace("stats"), inherits = FALSE)(levels, sparse = sparse)
 }

@@ -24,11 +24,11 @@ Currently, this just goes through each layer of data and sets the
 }
 \examples{
 
-a <- tibble(
+a <- dplyr::tibble(
   alp=runif(120,0,3),
   bet=alp*2+1,
   gam=rbinom(120,1,0.5))
-b <- tibble(
+b <- dplyr::tibble(
   alp=runif(120,3,10),
   bet=-alp*2+10,
   gam=rbinom(120,1,0.5))
@@ -38,7 +38,6 @@ g <- a \%>\%
   ggplot2::geom_vline(xintercept = 5) +
   ggplot2::geom_line(data=b)
 plot(g)
-plot(hide_data(g))
-
+plot(hide_geoms(g))
 
 }
