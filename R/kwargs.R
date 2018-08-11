@@ -26,10 +26,18 @@
 args_and_kwargs <- function(..., .already_quosure = FALSE) {
   if (.already_quosure == TRUE) qs <- list(...)
   else qs <- rlang::enquos(...)
-  l <- list(args =   qs[names(qs) == ""],
-            kwargs = qs[names(qs) != ""])
+
+  l <- list(args =   qs[name_vec(qs) == ""],
+            kwargs = qs[name_vec(qs) != ""])
   return(l)
 }
+
+# Returns a vector of names of a list/vector, and if there aren't any, it makes them ""
+name_vec <- function(l) {
+  if (is.null(names(l))) rep("", length(l))
+  else names(l)
+}
+
 
 #' Pass quosures into a function as arguments
 #'
