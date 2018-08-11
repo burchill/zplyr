@@ -4,10 +4,12 @@
 \alias{args_and_kwargs}
 \title{Separate \dots into Python-esque \code{*args} and \code{**kwargs}}
 \usage{
-args_and_kwargs(...)
+args_and_kwargs(..., .already_quosure = FALSE)
 }
 \arguments{
 \item{\dots}{Whatever mix of named and unnamed arguments you want}
+
+\item{.already_quosure}{if the arguments are already all quosures (in which case it will just sort them by named vs. unnamed arguments)}
 }
 \value{
 A named list of lists, with \code{$args} being a list of quosures of the unnamed arguments and \code{$kwargs} being a list of quosures of the named arguments.

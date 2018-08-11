@@ -4,6 +4,7 @@
 #' as quosures.
 #'
 #' @param \dots Whatever mix of named and unnamed arguments you want
+#' @param .already_quosure if the arguments are already all quosures (in which case it will just sort them by named vs. unnamed arguments)
 #' @return A named list of lists, with `$args` being a list of quosures of the unnamed arguments and `$kwargs` being a list of quosures of the named arguments.
 #' @examples
 #'
@@ -22,8 +23,9 @@
 #'   return(geoms)
 #' }
 #' @export
-args_and_kwargs <- function(...) {
-  qs <- rlang::enquos(...)
+args_and_kwargs <- function(..., .already_quosure = FALSE) {
+  if (.already_quosure == TRUE) qs <- list(...)
+  else qs <- rlang::enquos(...)
   l <- list(args =   qs[names(qs) == ""],
             kwargs = qs[names(qs) != ""])
   return(l)
@@ -35,8 +37,13 @@ args_and_kwargs <- function(...) {
 #' passes in a quosure or list of quosures (i.e. from \code{\link[rlang]{quos}})
 #' into the supplied function as arguments to that function.
 #'
+#' This function has not been tested much with the inclusion of the non-quosure \dots
+#' arguments. It gets a little fly-by-night beyond simple passing of quosures.
+#'
 #' @param .f The function the arguments will be passed into
 #' @param quosures A quosure or list of quosures
+#' @param \dots Any other arguments to be passed into `.f`. (Unless the ordering fits perfectly, i.e. almost never, use named arguments)
+#' @param .quos_first whether the quosures should be inputted to `.f` before or after the other arguments. This is just for flexibility in some edge cases and users should try to avoid the need to change use this by naming the other arguments
 #' @examples
 #' px <- "Hello"
 #' p <- function(x) print(x)
@@ -49,12 +56,15 @@ args_and_kwargs <- function(...) {
 #' m <- function(x, y, ...) paste0(x," ",y)
 #' quo_to_args(m, quos(y="World", "HAHAHHA", x="Hello"))
 #' @export
-quo_to_args <- function(.f, quosures) {
-  if (rlang::is_list(quosures)) {
-    kwargs <- purrr::map(quosures, rlang::eval_tidy)
-  } else {
-    kwargs <- list(rlang::eval_tidy(quosures))
-  }
+quo_to_args <- function(.f, quosures, ..., .quos_first=TRUE) {
+  other_args <- list(...)
+
+  if (rlang::is_list(quosures)) kwargs <- purrr::map(quosures, rlang::eval_tidy)
+  else  kwargs <- list(rlang::eval_tidy(quosures))
+
+  if (.quos_first == TRUE) kwargs <- rlang::list2(!!!kwargs, !!!other_args)
+  else kwargs <- rlang::list2(!!!other_args, !!!kwargs)
+
   rlang::eval_tidy(rlang::quo(.f(!!!kwargs)))
 }
 

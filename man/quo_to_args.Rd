@@ -4,17 +4,25 @@
 \alias{quo_to_args}
 \title{Pass quosures into a function as arguments}
 \usage{
-quo_to_args(.f, quosures)
+quo_to_args(.f, quosures, ..., .quos_first = TRUE)
 }
 \arguments{
 \item{.f}{The function the arguments will be passed into}
 
 \item{quosures}{A quosure or list of quosures}
+
+\item{\dots}{Any other arguments to be passed into \code{.f}. (Unless the ordering fits perfectly, i.e. almost never, use named arguments)}
+
+\item{.quos_first}{whether the quosures should be inputted to \code{.f} before or after the other arguments. This is just for flexibility in some edge cases and users should try to avoid the need to change use this by naming the other arguments}
 }
 \description{
 Generally to be paired with \code{\link{args_and_kwargs}}, \code{quo_to_args}
 passes in a quosure or list of quosures (i.e. from \code{\link[rlang]{quos}})
 into the supplied function as arguments to that function.
+}
+\details{
+This function has not been tested much with the inclusion of the non-quosure \dots
+arguments. It gets a little fly-by-night beyond simple passing of quosures.
 }
 \examples{
 px <- "Hello"
