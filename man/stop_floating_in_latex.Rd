@@ -14,7 +14,7 @@ In order to do that, you first need to include the LaTeX package \code{placeins}
 (i.e., via \code{header-includes: \\usepackage{placeins}}). Then, in the first chunk, you
 should put the function: \cr\preformatted{knitr::knit_hooks$set(plot = function(x, options)  {
   if (is.null(options$regfloat) || options$regfloat==FALSE) {
-    paste0(knitr::hook_plot_tex(x, options), "\n\\FloatBarrier\n")
+    paste0(knitr::hook_plot_tex(x, options), "\n\\\\FloatBarrier\n")
   } else {
     knitr::hook_plot_tex(x, options)
   }
