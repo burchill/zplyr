@@ -36,6 +36,6 @@ print_and_pass <- function(.x, .f=identity, .text=NULL, ...) {
 #' @param \dots Additional arguments for `print.data.frame`
 #' @export
 zead <- function(df, n = 6L, ...) {
-  print.data.frame(head(df), ...)
+  print.data.frame(head(df, n=n), ...)
 }
 

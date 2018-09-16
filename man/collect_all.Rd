@@ -4,12 +4,14 @@
 \alias{collect_all}
 \title{Collect warnings/errors/messages from an expression without rerunning it}
 \usage{
-collect_all(expr, catchErrors = FALSE)
+collect_all(expr, catchErrors = FALSE, asStrings = TRUE)
 }
 \arguments{
 \item{expr}{The expression you want to catch warnings and messages for.}
 
-\item{catchErrors}{A boolean that, if true, will catch error messages just like it catches warnings and messages. It will then return \code{NA} as the value. I generally would not recommend using this, because I understood how this worked the least.}
+\item{catchErrors}{A boolean which, if true, will catch error messages just like it catches warnings and messages. It will then return \code{NA} as the value.}
+
+\item{asStrings}{A boolean which, if true, will convert the conditions into strings.}
 }
 \value{
 A named list with the result of the expression, the warnings, and the messages raised by

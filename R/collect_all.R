@@ -14,7 +14,8 @@
 #' would be a total pain in the butt.
 #'
 #' @param expr The expression you want to catch warnings and messages for.
-#' @param catchErrors A boolean that, if true, will catch error messages just like it catches warnings and messages. It will then return \code{NA} as the value. I generally would not recommend using this, because I understood how this worked the least.
+#' @param catchErrors A boolean which, if true, will catch error messages just like it catches warnings and messages. It will then return \code{NA} as the value.
+#' @param asStrings A boolean which, if true, will convert the conditions into strings.
 #' @return A named list with the result of the expression, the warnings, and the messages raised by
 #' the expression
 #' @examples
@@ -27,10 +28,13 @@
 #'    ~zplyr::collect_all(run_model_once(.))))
 #' }
 #' @export
-collect_all <- function(expr, catchErrors=FALSE) {
-  myErrors   <- NULL
-  myWarnings <- NULL
-  myMessages <- NULL
+collect_all <- function(expr, catchErrors = FALSE, asStrings = TRUE) {
+  if (asStrings == TRUE)
+    convert <- function(x) Map(as.character, x)
+  else convert <- identity
+
+  myErrors <- myWarnings <- myMessages <- NULL
+
   wHandler <- function(w) {
     myWarnings <<- c(myWarnings, list(w))
     invokeRestart("muffleWarning")
@@ -43,19 +47,20 @@ collect_all <- function(expr, catchErrors=FALSE) {
     myErrors <<- c(myErrors, list(e))
     invokeRestart("return_NA")
   }
+
   # Not the prettiest code, I'll give you that
   if (catchErrors) {
     val <- withCallingHandlers(
       withRestarts(expr, return_NA = function(x) NA),
       warning = wHandler, message = mHandler, error = eHandler)
-    myWarningList <- Map(as.character, myWarnings)
-    myMessageList <- Map(as.character, myMessages)
-    myErrorList  <-  Map(as.character, myErrors)
+    myWarningList <- convert(myWarnings)
+    myMessageList <- convert(myMessages)
+    myErrorList  <-  convert(myErrors)
     list(value = val, warnings = myWarningList, messages = myMessageList, errors = myErrorList)
   } else {
     val <- withCallingHandlers(expr, warning = wHandler, message = mHandler)
-    myWarningList <- Map(as.character, myWarnings)
-    myMessageList <- Map(as.character, myMessages)
+    myWarningList <- convert(myWarnings)
+    myMessageList <- convert(myMessages)
     list(value = val, warnings = myWarningList, messages = myMessageList)
   }
 }
