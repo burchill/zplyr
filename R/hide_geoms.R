@@ -37,3 +37,13 @@ hide_geoms <- function(gg_obj) {
   plot_data$data <- data_list
   return(ggplot2::ggplot_gtable(plot_data))
 }
+
+#' Get ggplot default colors
+#'
+#' Taken from John Colby's answer here: https://stackoverflow.com/questions/8197559/emulate-ggplot2-default-color-palette, this function lets you get the default palette from ggplot2.
+#' @param n the number of different colors in the palette
+#' @export
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  hcl(h = hues, l = 65, c = 100)[1:n]
+}
