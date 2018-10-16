@@ -4,8 +4,8 @@
 \alias{dots_and_bars}
 \title{(Deprecated) Make dotplots with error bars with a single function}
 \usage{
-dots_and_bars(gg_obj, binaxis = "y", stackdir = "center", dotsize = 0.5,
-  alpha = 0.2, ...)
+dots_and_bars(gg_obj, binaxis = "y", stackdir = "center",
+  dotsize = 0.5, alpha = 0.2, ...)
 }
 \arguments{
 \item{gg_obj}{The ggplot object (i.e., what is built up from \code{ggplot(\dots)}). If \code{errorbars()} does not immediately follow \code{ggplot(\dots)}, use \code{\%+\%} instead of \code{+} to add the intervening ggplot layers until the ggplot object is piped into the function.}

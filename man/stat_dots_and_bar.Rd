@@ -5,11 +5,11 @@
 \alias{geom_dots_and_bars}
 \title{Make dotplots with error bars with a single function}
 \usage{
-stat_dots_and_bar(..., binaxis = "y", stackdir = "center", dotsize = 0.5,
-  alpha = 0.2)
+stat_dots_and_bar(..., binaxis = "y", stackdir = "center",
+  dotsize = 0.5, alpha = 0.2)
 
-geom_dots_and_bars(..., binaxis = "y", stackdir = "center", dotsize = 0.5,
-  alpha = 0.2)
+geom_dots_and_bars(..., binaxis = "y", stackdir = "center",
+  dotsize = 0.5, alpha = 0.2)
 }
 \arguments{
 \item{\dots}{Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.}
