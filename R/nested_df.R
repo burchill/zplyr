@@ -135,10 +135,15 @@ filter_in_sub <- function(.data, data_col_name, ...,
     warning("Some nested data frames are grouped. `filter_in_sub` will be respecting these groups in filtering.")
 
   df <- df[!null_indices,] %>%
-    mutate(!! data_col_name := purrr::map(!! data_col_name, scoper))
+    mutate(!! rlang::quo_name(data_col_name) := purrr::map(!! data_col_name, scoper))
   if (drop_empty == TRUE) df %>% drop_empty_subs(!! data_col_name)
   else df
 }
+
+
+
+
+
 
 #' Filter *by* nested data frames
 #'
