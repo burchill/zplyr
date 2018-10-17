@@ -19,21 +19,21 @@
 #'   tidyr::nest(-cyl)
 #'
 #' d %>%
-#'   summarise_from_sub(data, mean_mpg = mean(mpg),
+#'   summarise_sub(data, mean_mpg = mean(mpg),
 #'                      sd_hp = sd(hp),
 #'                      n=n())
 #'
 #' # Here we can see that if we set `scoped_in` to `FALSE`, `n()` will access the number of rows of the higher-level data frame instead of the nested ones. This could be useful in some circumstances, I just can't think of any.
 #' d %>%
-#'   summarise_from_sub(data, n=n(), scoped_in = FALSE)
+#'   summarise_sub(data, n=n(), scoped_in = FALSE)
 #'
 #' # If there's a NULL value in the nested column, by default it will throw an error
 #' # If `handle_null_vals` is `TRUE`, then rows with NULL values will return NAs
 #' d[2,]$data <- list(NULL)
-#' d %>% summarise_from_sub(data, mean_mpg = mean(mpg), n=n())
-#' d %>% summarise_from_sub(data, mean_mpg = mean(mpg), n=n(), handle_null_vals = TRUE)
+#' d %>% summarise_sub(data, mean_mpg = mean(mpg), n=n())
+#' d %>% summarise_sub(data, mean_mpg = mean(mpg), n=n(), handle_null_vals = TRUE)
 #' @export
-summarise_from_sub <- function(.data, data_col_name, ...,
+summarise_sub <- function(.data, data_col_name, ...,
                           handle_null_vals = FALSE,
                           scoped_in = TRUE) {
   # Possibly flexible in the future
