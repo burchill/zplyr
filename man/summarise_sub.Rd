@@ -4,26 +4,26 @@
 \alias{summarise_sub}
 \title{Add columns from nested data frames}
 \usage{
-summarise_sub(.data, data_col_name, ..., handle_null_vals = FALSE,
+summarise_sub(.data, data_col_name, ..., handle_nulls = FALSE,
   scoped_in = TRUE)
 }
 \arguments{
 \item{.data}{A data frame}
 
-\item{data_col_name}{The bare name of the column of nested data frames}
+\item{data_col_name}{The column name of the nested data frames, bare or as a string.}
 
 \item{\dots}{the name-value pairs of summary functions (see \code{\link[dplyr]{summarise}} for more information)}
 
-\item{handle_null_vals}{A boolean indicating whether rows with NULL values for the nested column should throw an error (\code{FALSE}) or should have NAs in the new columns.}
+\item{handle_nulls}{A boolean indicating whether rows with NULL values for the nested column should throw an error (\code{FALSE}) or should have NAs in the new columns.}
 
 \item{scoped_in}{A boolean indicating whether the summary functions are scoped within the nested data frames alone (\code{TRUE}) or whether they also have access to the higher-level data frame. Changing this value can radically change the behavior.}
 }
 \value{
-a data frame / tibble
+A data frame / tibble
 }
 \description{
 Sometimes, when one is working with data frames that have data frames nested within
-them (see \code{\link[tibble]{`tibble-package`}} or \code{\link[tidyr]{nest}}), one
+them (see \code{\link[tibble]{tibble-package}} or \code{\link[tidyr]{nest}}), one
 will want to extract summary statistics or key aspects of information from the embedded
 data frames and move them to columns in the top level.  This function applies summary
 functions to the nested data frames and pulls them out into columns of the higher-level data frame.
@@ -44,8 +44,8 @@ d \%>\%
   summarise_sub(data, n=n(), scoped_in = FALSE)
 
 # If there's a NULL value in the nested column, by default it will throw an error
-# If `handle_null_vals` is `TRUE`, then rows with NULL values will return NAs
+# If `handle_nulls` is `TRUE`, then rows with NULL values will return NAs
 d[2,]$data <- list(NULL)
 d \%>\% summarise_sub(data, mean_mpg = mean(mpg), n=n())
-d \%>\% summarise_sub(data, mean_mpg = mean(mpg), n=n(), handle_null_vals = TRUE)
+d \%>\% summarise_sub(data, mean_mpg = mean(mpg), n=n(), handle_nulls = TRUE)
 }
