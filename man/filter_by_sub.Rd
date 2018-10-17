@@ -26,6 +26,19 @@ Applies \code{\link[dplyr]{filter}} to rows in a data frame based on the results
 \details{
 Unlike \code{\link{filter_in_sub}}, which applies a filter \emph{within} the nested data frames, \code{filter_by_sub} applies the filter to the top-level data frame.
 }
+\examples{
+d <- mtcars \%>\%
+  dplyr::mutate(Name=row.names(mtcars)) \%>\%
+  as.tibble() \%>\%
+  tidyr::nest(-cyl)
+
+d \%>\% filter_by_sub(data, any(grepl("Merc", Name)), n() > 12)
+# We can see what happens when we make a nested data frame NULL and if we make it a row of 0
+d[2,]$data <- list(NULL)
+d[1,]$data <- list(d[1,]$data[[1]][FALSE,])
+d \%>\% filter_by_sub(data, any(grepl("Merc", Name)), all(mpg < 20))
+d \%>\% filter_by_sub(data, any(grepl("Merc", Name)), all(mpg < 20), handle_nulls = TRUE)
+}
 \seealso{
 \code{\link{filter_in_sub}}
 }

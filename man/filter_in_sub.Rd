@@ -26,3 +26,6 @@ A data frame / tibble
 \description{
 Applies \code{\link[dplyr]{filter}} within nested data frames.
 }
+\seealso{
+\code{\link{filter_by_sub}}
+}

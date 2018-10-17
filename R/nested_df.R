@@ -110,6 +110,7 @@ drop_empty_subs <- function(.data, data_col_name, empty_df = TRUE) {
 #' @param drop_empty If `TRUE`, will drop rows that, after filtering, have no rows.
 #' @param scoped_in A boolean indicating whether the summary functions are scoped within the nested data frames alone (`TRUE`) or whether they also have access to the higher-level data frame. Changing this value can radically change the behavior.
 #' @return A data frame / tibble
+#' @seealso \code{\link{filter_by_sub}}
 #' @export
 filter_in_sub <- function(.data, data_col_name, ...,
                           handle_nulls = FALSE,
@@ -121,7 +122,7 @@ filter_in_sub <- function(.data, data_col_name, ...,
   # Otherwise, assume it's bare
   else data_col_name <- rlang::enquo(data_col_name)
 
-  stuff <- rlang::enquos(...) %>% rlang::quos_auto_name()
+  stuff <- rlang::enquos(...)
   # So that things can scope right
   scoper <- function(.inner_df) filter(.inner_df, !!! stuff)
 
@@ -152,6 +153,18 @@ filter_in_sub <- function(.data, data_col_name, ...,
 #' @param drop_empty If `TRUE`, will drop rows that, after filtering, have no rows.
 #' @return A data frame / tibble
 #' @seealso \code{\link{filter_in_sub}}
+#' @examples
+#' d <- mtcars %>%
+#'   dplyr::mutate(Name=row.names(mtcars)) %>%
+#'   as.tibble() %>%
+#'   tidyr::nest(-cyl)
+#'
+#' d %>% filter_by_sub(data, any(grepl("Merc", Name)), n() > 12)
+#' # We can see what happens when we make a nested data frame NULL and if we make it a row of 0
+#' d[2,]$data <- list(NULL)
+#' d[1,]$data <- list(d[1,]$data[[1]][FALSE,])
+#' d %>% filter_by_sub(data, any(grepl("Merc", Name)), all(mpg < 20))
+#' d %>% filter_by_sub(data, any(grepl("Merc", Name)), all(mpg < 20), handle_nulls = TRUE)
 #' @export
 filter_by_sub <- function(.data, data_col_name, ...,
                           handle_nulls = FALSE) {
@@ -161,7 +174,7 @@ filter_by_sub <- function(.data, data_col_name, ...,
   # Otherwise, assume it's bare
   else data_col_name <- rlang::enquo(data_col_name)
 
-  stuff <- rlang::enquos(...) %>% rlang::quos_auto_name()
+  stuff <- rlang::enquos(...)
 
   null_indices <- .data[[quo_name(data_col_name)]] %>%
     purrr::map_lgl(is.null)
