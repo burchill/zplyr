@@ -10,12 +10,21 @@
 #' (i.e., via `header-includes: \\usepackage{placeins}`). Then, in the first chunk, you
 #' should put the function: \cr
 #' ```
-#' knitr::knit_hooks$set(plot = function(x, options)  {
-#'   if (is.null(options$regfloat) || options$regfloat==FALSE) {
-#'     paste0(knitr::hook_plot_tex(x, options), "\n\\\\FloatBarrier\n")
-#'   } else {
-#'     knitr::hook_plot_tex(x, options)
+#' knitr::knit_hooks$set(plot = function (x, options) {
+#'   float_correct <- function(f, y, opts)  {
+#'     if (is.null(opts$regfloat) || opts$regfloat==FALSE)
+#'       paste0(f(y, opts), "\n\n\\\\FloatBarrier\n")
+#'     else
+#'       f(y, opts)
 #'   }
+#'   if (!is.null(options$out.width) || !is.null(options$out.height) ||
+#'       !is.null(options$out.extra) || options$fig.align != "default" ||
+#'       !is.null(options$fig.subcap)) {
+#'     if (is.null(options$fig.scap))
+#'       options$fig.scap = NA
+#'     return(float_correct(knitr:::hook_plot_tex, x, options))
+#'   }
+#'   return(float_correct(knitr:::hook_plot_md_base, x, options))
 #' })
 #' ```
 #' In order to disable this behavior for specific chunks, just put `regFloat=TRUE` as a chunk option.
