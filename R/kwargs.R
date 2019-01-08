@@ -26,16 +26,12 @@
 args_and_kwargs <- function(..., .already_quosure = FALSE) {
   if (.already_quosure == TRUE) qs <- list(...)
   else qs <- rlang::enquos(...)
+  qs <- map2(qs, seq_along(qs),
+             ~`attr<-`(.x, "arg_pos", .y))
 
-  l <- list(args =   qs[name_vec(qs) == ""],
-            kwargs = qs[name_vec(qs) != ""])
+  l <- list(args =   qs[rlang::names2(qs) == ""],
+            kwargs = qs[rlang::names2(qs) != ""])
   return(l)
-}
-
-# Returns a vector of names of a list/vector, and if there aren't any, it makes them ""
-name_vec <- function(l) {
-  if (is.null(names(l))) rep("", length(l))
-  else names(l)
 }
 
 
