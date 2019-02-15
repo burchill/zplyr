@@ -1,7 +1,7 @@
 #' Separate \dots into Python-esque \code{*args} and \code{**kwargs}
 #'
-#' This function will return a named a separated list of named and unnamed arguments
-#' as quosures.
+#' This function will return a named list with two sublists, 'args' and 'kwargs', which contain the unnamed and named arguments as quosures. \cr
+#' This is useful for when you want these two types of arguments to behave differently. The quosures will also have the attribute `'arg_pos'`, which will indicate their position in the original order in which they were supplied.
 #'
 #' @param \dots Whatever mix of named and unnamed arguments you want
 #' @param .already_quosure if the arguments are already all quosures (in which case it will just sort them by named vs. unnamed arguments)
