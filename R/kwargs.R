@@ -26,7 +26,7 @@
 args_and_kwargs <- function(..., .already_quosure = FALSE) {
   if (.already_quosure == TRUE) qs <- list(...)
   else qs <- rlang::enquos(...)
-  qs <- map2(qs, seq_along(qs),
+  qs <- purrr::map2(qs, seq_along(qs),
              ~`attr<-`(.x, "arg_pos", .y))
 
   l <- list(args =   qs[rlang::names2(qs) == ""],
