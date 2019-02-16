@@ -4,10 +4,10 @@
 \alias{drop_empty_subs}
 \title{Drop rows with empty nested data frames}
 \usage{
-drop_empty_subs(.data, data_col_name, empty_df = TRUE)
+drop_empty_subs(df, data_col_name, empty_df = TRUE)
 }
 \arguments{
-\item{.data}{A data frame / tibble}
+\item{df}{A data frame / tibble}
 
 \item{data_col_name}{The column name of the nested data frames, bare or as a string.}
 

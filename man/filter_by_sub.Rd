@@ -4,14 +4,14 @@
 \alias{filter_by_sub}
 \title{Filter \emph{by} nested data frames}
 \usage{
-filter_by_sub(.data, data_col_name, ..., handle_nulls = FALSE)
+filter_by_sub(df, data_col_name, ..., handle_nulls = FALSE)
 }
 \arguments{
-\item{.data}{A data frame / tibble}
+\item{df}{A data frame / tibble}
 
 \item{data_col_name}{The column name of the nested data frames, bare or as a string.}
 
-\item{\dots}{Logical predicates defined in terms of the variables in \code{.data}, that evaluate to a length of 1. Multiple conditions are combined with \code{&}. Only rows where the condition evaluates to \code{TRUE} are kept.}
+\item{\dots}{Logical predicates defined in terms of the variables in \code{df}, that evaluate to a length of 1. Multiple conditions are combined with \code{&}. Only rows where the condition evaluates to \code{TRUE} are kept.}
 
 \item{handle_nulls}{If \code{TRUE}, drops rows with \code{NULL} data frames. Otherwise will throw an error if they are encountered.}
 
@@ -29,14 +29,17 @@ Unlike \code{\link{filter_in_sub}}, which applies a filter \emph{within} the nes
 \examples{
 d <- mtcars \%>\%
   dplyr::mutate(Name=row.names(mtcars)) \%>\%
-  as.tibble() \%>\%
+  as_tibble() \%>\%
   tidyr::nest(-cyl)
 
 d \%>\% filter_by_sub(data, any(grepl("Merc", Name)), n() > 12)
 # We can see what happens when we make a nested data frame NULL and if we make it a row of 0
 d[2,]$data <- list(NULL)
 d[1,]$data <- list(d[1,]$data[[1]][FALSE,])
+d
+\dontrun{
 d \%>\% filter_by_sub(data, any(grepl("Merc", Name)), all(mpg < 20))
+}
 d \%>\% filter_by_sub(data, any(grepl("Merc", Name)), all(mpg < 20), handle_nulls = TRUE)
 }
 \seealso{

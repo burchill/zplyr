@@ -4,15 +4,15 @@
 \alias{filter_in_sub}
 \title{Filter within nested data frames}
 \usage{
-filter_in_sub(.data, data_col_name, ..., handle_nulls = FALSE,
+filter_in_sub(df, data_col_name, ..., handle_nulls = FALSE,
   drop_empty = FALSE, scoped_in = TRUE)
 }
 \arguments{
-\item{.data}{A data frame / tibble}
+\item{df}{A data frame / tibble}
 
 \item{data_col_name}{The column name of the nested data frames, bare or as a string.}
 
-\item{\dots}{Logical predicates defined in terms of the variables in \code{.data}. Multiple conditions are combined with \code{&}. Only rows where the condition evaluates to \code{TRUE} are kept. See \code{\link[dplyr]{filter}} for more information.}
+\item{\dots}{Logical predicates defined in terms of the variables in \code{df}. Multiple conditions are combined with \code{&}. Only rows where the condition evaluates to \code{TRUE} are kept. See \code{\link[dplyr]{filter}} for more information.}
 
 \item{handle_nulls}{If \code{TRUE}, drops rows with \code{NULL} data frames. Otherwise will throw an error if they are encountered.}
 

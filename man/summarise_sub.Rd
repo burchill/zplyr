@@ -4,11 +4,11 @@
 \alias{summarise_sub}
 \title{Add columns from nested data frames}
 \usage{
-summarise_sub(.data, data_col_name, ..., handle_nulls = FALSE,
+summarise_sub(df, data_col_name, ..., handle_nulls = FALSE,
   scoped_in = TRUE)
 }
 \arguments{
-\item{.data}{A data frame}
+\item{df}{A data frame}
 
 \item{data_col_name}{The column name of the nested data frames, bare or as a string.}
 
@@ -31,7 +31,7 @@ functions to the nested data frames and pulls them out into columns of the highe
 \examples{
 d <- mtcars \%>\%
   dplyr::mutate(Name=row.names(mtcars)) \%>\%
-  as.tibble() \%>\%
+  as_tibble() \%>\%
   tidyr::nest(-cyl)
 
 d \%>\%
@@ -46,6 +46,8 @@ d \%>\%
 # If there's a NULL value in the nested column, by default it will throw an error
 # If `handle_nulls` is `TRUE`, then rows with NULL values will return NAs
 d[2,]$data <- list(NULL)
+\dontrun{
 d \%>\% summarise_sub(data, mean_mpg = mean(mpg), n=n())
+}
 d \%>\% summarise_sub(data, mean_mpg = mean(mpg), n=n(), handle_nulls = TRUE)
 }
