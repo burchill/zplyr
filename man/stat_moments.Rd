@@ -5,9 +5,9 @@
 \title{Displaying skew/kurtosis text in plots}
 \usage{
 stat_moments(mapping = NULL, data = NULL, ..., moment = c("skewness",
-  "kurtosis", "both"), sig = FALSE, digits = 1,
-  alternative = c("less", "greater", "two.sided"), inherit.aes = TRUE,
-  parse = FALSE)
+  "kurtosis", "both"), sig = FALSE, excess_kurtosis = FALSE,
+  digits = 1, alternative = c("less", "greater", "two.sided"),
+  inherit.aes = TRUE, parse = FALSE)
 }
 \arguments{
 \item{mapping, data, inherit.aes, parse}{See \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} for details.}
@@ -15,6 +15,8 @@ stat_moments(mapping = NULL, data = NULL, ..., moment = c("skewness",
 \item{moment}{A string determining which moment to display. Can be one of three values: \code{"skewness"}, \code{"kurtosis"}, or \code{"both"}, which displays both moments.}
 
 \item{sig}{A logical; if true, will test the skewness for significance using \code{\link[moments:agostino.test]{moments::agostino.test()}}, i.e., the D'Agostino test of skewness. Significance will be indicated via asterisks.}
+
+\item{excess_kurtosis}{A logical; if \code{TRUE}, kurtosis will be expressed as "excess" kurtosis (i.e., kurtosis - 3, as 3 is the kurtosis of a normal distribution). If kurtosis is not displayed, this will be ignored.}
 
 \item{digits}{The number of digits after the decimal place to display for the moment values.}
 
