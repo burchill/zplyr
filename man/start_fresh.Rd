@@ -23,4 +23,6 @@ clicked on the broom icon, clicked 'yes' to remove all the current objects
 in the environment, clicked on 'Session', and then clicked 'Restart R'.
 This function does all that with one command, and prompts the user to confirm,
 as a way of being safe.
+
+This code takes inspiration and credit from two sources: Adam Lee Perelman's answer at https://stackoverflow.com/questions/6313079/quit-and-restart-a-clean-r-session-from-within-r, and Romain Francois' \code{nothing} package (https://github.com/romainfrancois/nothing/blob/master/R/zzz.R).
 }

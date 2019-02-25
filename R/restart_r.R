@@ -9,6 +9,8 @@
 #' in the environment, clicked on 'Session', and then clicked 'Restart R'.
 #' This function does all that with one command, and prompts the user to confirm,
 #' as a way of being safe.
+#' 
+#' This code takes inspiration and credit from two sources: Adam Lee Perelman's answer at https://stackoverflow.com/questions/6313079/quit-and-restart-a-clean-r-session-from-within-r, and Romain Francois' `nothing` package (https://github.com/romainfrancois/nothing/blob/master/R/zzz.R).
 #'
 #' @param counter Do not specify unless you set it to `2`, which will force a restart without prompting the user.
 #' @return `NULL` (because I'm a lazy programmer)
@@ -43,10 +45,23 @@ start_fresh <- function(counter=0) {
   # Adapted from Adam Lee Perelman's answer in:
   # https://stackoverflow.com/questions/6313079/quit-and-restart-a-clean-r-session-from-within-r
   do_it <- function() {
-    rm(list = ls(envir = globalenv()),envir = globalenv())
+    rm(list = ls(envir = globalenv()), envir = globalenv())
     # unloads packages as well
-    if (length(names(sessionInfo()$otherPkgs)) > 0)
-      lapply(paste('package:', names(sessionInfo()$otherPkgs), sep=""), detach, character.only=TRUE, unload=TRUE)
+    x <- as.data.frame(installed.packages())
+    x <- x[!is.na(x$Priority) & x$Priority=="base", c("Package", "Priority")]
+    base_names <- x$Package
+    
+    # From https://github.com/romainfrancois/nothing/blob/master/R/zzz.R
+    repeat{
+      pkgs <- setdiff(loadedNamespaces(), base_names)
+      if (!length(pkgs)) break
+      for (pkg in pkgs) {
+        try(unloadNamespace(pkg), silent = TRUE)
+      }
+    }
+    
+    # if (length(names(sessionInfo()$otherPkgs)) > 0)
+    #   lapply(paste('package:', names(sessionInfo()$otherPkgs), sep=""), detach, character.only=TRUE, unload=TRUE)
     gc()
     try_restart_rstudio()
   }
