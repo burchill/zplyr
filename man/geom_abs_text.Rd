@@ -8,7 +8,7 @@ geom_abs_text(mapping = NULL, data = NULL, stat = "identity", ...,
   parse = FALSE, inherit.aes = TRUE)
 }
 \arguments{
-\item{mapping, data, stat, parse, inherit.aes}{See the documentation for \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}}
+\item{mapping, data, \dots, stat, parse, inherit.aes}{See the documentation for \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}}
 }
 \description{
 \code{geom_abs_text} functions similarly to ggplot2's \code{geom_text}, except that instead of taking \code{x} and \code{y} aesthetics, it requires \code{xpos} and \code{ypos} aesthetics, values from 0-1 that determine the absolute \code{x} and \code{y} coordinates \emph{with respect to whatever viewport they are being plotted in}, be that the full panel or a facet panel. A value of 0.5 indicates the center of the axis, and a value of 1 indicates the far edge of the axis.

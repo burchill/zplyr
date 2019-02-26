@@ -10,7 +10,7 @@ stat_moments(mapping = NULL, data = NULL, ..., moment = c("skewness",
   inherit.aes = TRUE, parse = FALSE)
 }
 \arguments{
-\item{mapping, data, inherit.aes, parse}{See \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} for details.}
+\item{mapping, data, \dots, inherit.aes, parse}{See \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} for details.}
 
 \item{moment}{A string determining which moment to display. Can be one of three values: \code{"skewness"}, \code{"kurtosis"}, or \code{"both"}, which displays both moments.}
 

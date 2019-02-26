@@ -5,7 +5,7 @@
 #'
 #' This function has only been tested in a few scenarios, and only in `ggplot2 v2.2.1`.
 #'
-#' @param mapping,data,stat,parse,inherit.aes See the documentation for [ggplot2::geom_text()]
+#' @param mapping,data,\dots,stat,parse,inherit.aes See the documentation for [ggplot2::geom_text()]
 #' @examples
 #' df <- data.frame(
 #'   x = c(99, 0, 1),
@@ -26,11 +26,38 @@ geom_abs_text <- function (mapping = NULL, data = NULL, stat = "identity",
                  params = list(parse = parse, ...))
 }
 
+#' @param xpos A numeric between 0 and 1, indicating the x position
+#' @param ypos A numeric between 0 and 1, indicating the y position 
+#' @param label A character vector to be displayed on the plot
+#' @rdname stat_errorbar
+#' @export
+annotate_abs_text <- function(xpos, ypos, label, ...) {
+  data_l <- list(xpos=xpos, ypos=ypos, label=label)
+  aesthetics <- c(data_l, list(...))
+  lengths <- vapply(aesthetics, length, integer(1))
+  unequal <- length(unique(setdiff(lengths, 1L))) > 1L
+  if (unequal) {
+    bad <- lengths != 1L
+    details <- paste(names(aesthetics)[bad], " (", lengths[bad], 
+                     ")", sep = "", collapse = ", ")
+    stop("Unequal parameter lengths: ", details, call. = FALSE)
+  }
+  data <- data.frame(data_l)
+  ggplot2::layer(
+    geom = GeomAbsText, params = list(...), 
+    stat = ggplot2::StatIdentity, 
+    position = ggplot2::PositionIdentity, 
+    data = data, mapping = aes_all(names(data)), 
+    inherit.aes = FALSE, show.legend = FALSE)
+}
+
+
+
 #' Displaying skew/kurtosis text in plots
 #'
 #' `stat_moments()` summarises the data supplied to the x-axis, and draws text that displays the skewness and/or kurtosis of the data, with a variety of options. This is almost chiefly meant to be used in conjunction with a density plot, such as [ggplot2::geom_density()] or [ggplot2::stat_density()].  Since this object is returning text, it needs to be given coordinates on where to be placed. It requires the aesthetics `xpos` and `ypos` (see [geom_abs_text()]), which are coordinates (from 0-1) relative to the panel/facet panel the text is to be displayed in.
 #'
-#' @param mapping,data,inherit.aes,parse See [ggplot2::geom_text()] for details.
+#' @param mapping,data,\dots,inherit.aes,parse See [ggplot2::geom_text()] for details.
 #' @param moment A string determining which moment to display. Can be one of three values: `"skewness"`, `"kurtosis"`, or `"both"`, which displays both moments.
 #' @param sig A logical; if true, will test the skewness for significance using [moments::agostino.test()], i.e., the D'Agostino test of skewness. Significance will be indicated via asterisks.
 #' @param excess_kurtosis A logical; if `TRUE`, kurtosis will be expressed as "excess" kurtosis (i.e., kurtosis - 3, as 3 is the kurtosis of a normal distribution). If kurtosis is not displayed, this will be ignored.
