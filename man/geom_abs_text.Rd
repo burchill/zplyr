@@ -2,13 +2,22 @@
 % Please edit documentation in R/geom_abs_text.R
 \name{geom_abs_text}
 \alias{geom_abs_text}
+\alias{annotate_abs_text}
 \title{Text positioned relative to a ggplot panel/facet}
 \usage{
 geom_abs_text(mapping = NULL, data = NULL, stat = "identity", ...,
   parse = FALSE, inherit.aes = TRUE)
+
+annotate_abs_text(xpos, ypos, label, ...)
 }
 \arguments{
 \item{mapping, data, \dots, stat, parse, inherit.aes}{See the documentation for \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}}
+
+\item{xpos}{A numeric between 0 and 1, indicating the x position}
+
+\item{ypos}{A numeric between 0 and 1, indicating the y position}
+
+\item{label}{A character vector to be displayed on the plot}
 }
 \description{
 \code{geom_abs_text} functions similarly to ggplot2's \code{geom_text}, except that instead of taking \code{x} and \code{y} aesthetics, it requires \code{xpos} and \code{ypos} aesthetics, values from 0-1 that determine the absolute \code{x} and \code{y} coordinates \emph{with respect to whatever viewport they are being plotted in}, be that the full panel or a facet panel. A value of 0.5 indicates the center of the axis, and a value of 1 indicates the far edge of the axis.

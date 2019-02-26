@@ -29,7 +29,7 @@ geom_abs_text <- function (mapping = NULL, data = NULL, stat = "identity",
 #' @param xpos A numeric between 0 and 1, indicating the x position
 #' @param ypos A numeric between 0 and 1, indicating the y position 
 #' @param label A character vector to be displayed on the plot
-#' @rdname stat_errorbar
+#' @rdname geom_abs_text
 #' @export
 annotate_abs_text <- function(xpos, ypos, label, ...) {
   data_l <- list(xpos=xpos, ypos=ypos, label=label)
