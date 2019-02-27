@@ -6,13 +6,16 @@
 \alias{MomentLabel}
 \title{Displaying skew/kurtosis text in plots}
 \usage{
-stat_moments(mapping = NULL, data = NULL, ..., moment = c("skewness",
-  "kurtosis", "both"), sig = FALSE, excess_kurtosis = FALSE,
-  digits = 1, alternative = c("less", "greater", "two.sided"),
-  inherit.aes = TRUE, parse = FALSE)
+stat_moments(mapping = NULL, data = NULL, ..., geom = c("abs_text",
+  "abs_label"), moment = c("skewness", "kurtosis", "both"),
+  sig = FALSE, excess_kurtosis = FALSE, digits = 1,
+  alternative = c("less", "greater", "two.sided"), inherit.aes = TRUE,
+  parse = FALSE)
 }
 \arguments{
 \item{mapping, data, \dots, inherit.aes, parse}{See \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} for details.}
+
+\item{geom}{Determines which geom to use, \code{\link[=geom_abs_text]{geom_abs_text()}} or \code{\link[=geom_abs_label]{geom_abs_label()}}. By default, it uses \code{geom_abs_text()}.}
 
 \item{moment}{A string determining which moment to display. Can be one of three values: \code{"skewness"}, \code{"kurtosis"}, or \code{"both"}, which displays both moments.}
 

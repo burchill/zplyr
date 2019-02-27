@@ -89,6 +89,7 @@ annotate_abs_label <- zannotator(GeomAbsLabel)
 #' `stat_moments()` summarises the data supplied to the x-axis, and draws text that displays the skewness and/or kurtosis of the data, with a variety of options. This is almost chiefly meant to be used in conjunction with a density plot, such as [ggplot2::geom_density()] or [ggplot2::stat_density()].  Since this object is returning text, it needs to be given coordinates on where to be placed. It requires the aesthetics `xpos` and `ypos` (see [geom_abs_text()]), which are coordinates (from 0-1) relative to the panel/facet panel the text is to be displayed in.
 #'
 #' @param mapping,data,\dots,inherit.aes,parse See [ggplot2::geom_text()] for details.
+#' @param geom Determines which geom to use, [geom_abs_text()] or [geom_abs_label()]. By default, it uses `geom_abs_text()`.
 #' @param moment A string determining which moment to display. Can be one of three values: `"skewness"`, `"kurtosis"`, or `"both"`, which displays both moments.
 #' @param sig A logical; if true, will test the skewness for significance using [moments::agostino.test()], i.e., the D'Agostino test of skewness. Significance will be indicated via asterisks.
 #' @param excess_kurtosis A logical; if `TRUE`, kurtosis will be expressed as "excess" kurtosis (i.e., kurtosis - 3, as 3 is the kurtosis of a normal distribution). If kurtosis is not displayed, this will be ignored.
@@ -118,6 +119,7 @@ annotate_abs_label <- zannotator(GeomAbsLabel)
 #' @export
 stat_moments <- function (mapping = NULL, data = NULL,
                           ...,
+                          geom = c("abs_text", "abs_label"),
                           moment = c("skewness","kurtosis","both"),
                           sig = FALSE,
                           excess_kurtosis = FALSE,
@@ -126,10 +128,17 @@ stat_moments <- function (mapping = NULL, data = NULL,
                           inherit.aes = TRUE,
                           parse = FALSE) {
   moment <- match.arg(moment)
+  if (inherits(geom, "Geom")) {
+    stopifnot(inherits(geom, "GeomAbsText") || inherits(geom, "GeomAbsLabel"))
+  } else {
+    geom <- match.arg(geom)
+    geom <- switch(geom, abs_text = GeomAbsText, abs_label = GeomAbsLabel)
+  }
+
   alternative <- match.arg(alternative)
   ggplot2::layer(
     data = data, mapping = mapping, stat = MomentLabel,
-    geom = GeomAbsText,
+    geom = geom,
     position = ggplot2::PositionIdentity,
     inherit.aes = inherit.aes,
     params = list(parse = parse, moment = moment, sig = sig,
