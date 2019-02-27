@@ -1,7 +1,7 @@
 Package: zplyr
 Type: Package
 Title: Zach Burchill's Personal Functions
-Version: 0.2.3
+Version: 0.2.3.1
 Author: Zachary Burchill
 Maintainer: Zachary Burchill <nah@toobusy.com>
 Description: A collection of functions that I find helpful across projects.

@@ -12,11 +12,13 @@
 #'   y = c(-100, 0, 100),
 #'   label = c("A","B", "C")
 #' )
+#'
 #' ggplot(df, aes(x=x,y=y,label=label, color=label)) +
 #'   geom_point() +
 #'   geom_text() +
 #'   facet_wrap(~label, scales="free") +
-#'   geom_abs_text(aes(xpos=0.5, ypos=0.75, label = paste0("relative: ", label)))
+#'   geom_abs_text(aes(xpos=0.5, ypos=0.75, label = paste0("relative: ", label))) +
+#'   annotate_abs_label(xpos=0.25, ypos=0.25, label="wildcard!")
 #'
 #' @export
 geom_abs_text <- function (mapping = NULL, data = NULL, stat = "identity",
@@ -26,30 +28,59 @@ geom_abs_text <- function (mapping = NULL, data = NULL, stat = "identity",
                  params = list(parse = parse, ...))
 }
 
-#' @param xpos A numeric between 0 and 1, indicating the x position
-#' @param ypos A numeric between 0 and 1, indicating the y position 
-#' @param label A character vector to be displayed on the plot
+#' @param label.padding,label.r,label.size See the documentation for [ggplot2::geom_label()]
 #' @rdname geom_abs_text
 #' @export
-annotate_abs_text <- function(xpos, ypos, label, ...) {
-  data_l <- list(xpos=xpos, ypos=ypos, label=label)
-  aesthetics <- c(data_l, list(...))
-  lengths <- vapply(aesthetics, length, integer(1))
-  unequal <- length(unique(setdiff(lengths, 1L))) > 1L
-  if (unequal) {
-    bad <- lengths != 1L
-    details <- paste(names(aesthetics)[bad], " (", lengths[bad], 
-                     ")", sep = "", collapse = ", ")
-    stop("Unequal parameter lengths: ", details, call. = FALSE)
-  }
-  data <- data.frame(data_l)
-  ggplot2::layer(
-    geom = GeomAbsText, params = list(...), 
-    stat = ggplot2::StatIdentity, 
-    position = ggplot2::PositionIdentity, 
-    data = data, mapping = aes_all(names(data)), 
-    inherit.aes = FALSE, show.legend = FALSE)
+geom_abs_label <- function(mapping = NULL, data = NULL, stat = "identity",
+                           ..., parse = FALSE, label.padding = unit(0.25, "lines"),
+                           label.r = unit(0.15, "lines"), label.size = 0.25,
+                           na.rm = FALSE, inherit.aes = TRUE) {
+  ggplot2::layer(data = data, mapping = mapping, stat = stat,
+                 geom = GeomAbsLabel,  position = ggplot2::PositionIdentity,
+                 inherit.aes = inherit.aes,
+                 params = list(parse = parse, label.padding = label.padding,
+                               label.r = label.r, label.size = label.size,
+                               na.rm = na.rm, ...))
 }
+
+
+zannotator <- function(ogeom) {
+  function(xpos, ypos, ...) {
+    data_l <- list(xpos=xpos, ypos=ypos)
+    aesthetics <- c(data_l, list(...))
+    lengths <- vapply(aesthetics, length, integer(1))
+    unequal <- length(unique(setdiff(lengths, 1L))) > 1L
+    if (unequal) {
+      bad <- lengths != 1L
+      details <- paste(names(aesthetics)[bad], " (", lengths[bad],
+                       ")", sep = "", collapse = ", ")
+      stop("Unequal parameter lengths: ", details, call. = FALSE)
+    }
+    data <- data.frame(data_l)
+    ggplot2::layer(
+      geom = ogeom, params = list(...),
+      stat = ggplot2::StatIdentity,
+      position = ggplot2::PositionIdentity,
+      data = data, mapping = aes_all(names(data)),
+      inherit.aes = FALSE, show.legend = FALSE)
+  }
+}
+
+
+#' @param xpos A numeric between 0 and 1, indicating the x position
+#' @param ypos A numeric between 0 and 1, indicating the y position
+#' @param \dots Other arguments passed on to [ggplot2::layer()]. It must include an argument named `label`. Otherwise, these are often aesthetics, used to set an aesthetic to a fixed value, like `colour = "red"`.`
+#' @rdname geom_abs_text
+#' @export
+annotate_abs_text <- zannotator(GeomAbsText)
+
+#' @rdname geom_abs_text
+#' @export
+annotate_abs_label <- zannotator(GeomAbsLabel)
+
+
+
+
 
 
 
@@ -108,7 +139,7 @@ stat_moments <- function (mapping = NULL, data = NULL,
 }
 
 
-
+#' @rdname geom_abs_text
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -157,11 +188,75 @@ GeomAbsText <- ggplot2::ggproto(
   }
 )
 
+#' @rdname geom_abs_text
+#' @format NULL
+#' @usage NULL
+#' @export
+GeomAbsLabel <- ggplot2::ggproto(
+  "GeomAbsLabel",
+  ggplot2::GeomCustomAnn,
+
+  default_aes = ggplot2::GeomLabel$default_aes,
+  draw_key = ggplot2::draw_key_blank,
+  # required_aes = GeomText$required_aes,
+  required_aes = c("xpos", "ypos", "label"),
+
+  draw_panel = function (data, panel_scales, coord, parse = FALSE,
+                         xpos, ypos, label.padding = unit(0.25, "lines"),
+                         label.r = unit(0.15, "lines"), label.size = 0.25) {
+    if (!inherits(coord, "CoordCartesian")) {
+      stop("annotation_custom only works with Cartesian coordinates",
+           call. = FALSE)
+    }
+
+    lab <- data$label
+    if (parse) {
+      lab <- parse(text = as.character(lab))
+    }
+
+    corners <- data.frame(x = c(-Inf, Inf), y = c(-Inf, Inf))
+    new_data <- coord$transform(corners, panel_scales)
+    x_rng <- range(new_data$x, na.rm = TRUE)
+    y_rng <- range(new_data$y, na.rm = TRUE)
+    vp <- grid::viewport(x = mean(x_rng), y = mean(y_rng), width = diff(x_rng),
+                         height = diff(y_rng), just = c("center", "center"))
+
+    grobs <- lapply(1:nrow(data), function(i) {
+      row <- data[i, , drop = FALSE]
+
+      grob <- grid::gTree(
+        label = lab[i],
+        x = grid::unit(data$xpos, "npc"),
+        y = grid::unit(data$ypos, "npc"),
+        just = c(row$hjust, row$vjust),
+        padding = label.padding,
+        r = label.r,
+        name = NULL,
+        text.gp = grid::gpar(
+          col = row$colour, fontsize = row$size * .pt,
+          fontfamily = row$family, fontface = row$fontface,
+          lineheight = row$lineheight
+        ),
+        rect.gp = grid::gpar(
+          col = if (isTRUE(all.equal(label.size, 0))) NA else row$colour,
+          fill = scales::alpha(row$fill, row$alpha),
+          lwd = label.size * .pt
+        ),
+        vp = vp, cl = "labelgrob"
+      )
+
+    })
+    class(grobs) <- "gList"
+    final_grob <- grid::grobTree(children = grobs)
+    final_grob$name <- grid::grobName(final_grob, "geom_abs_label")
+
+    final_grob
+
+  }
+)
 
 
-
-
-
+#' @rdname stat_moments
 #' @format NULL
 #' @usage NULL
 #' @export
