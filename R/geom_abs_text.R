@@ -235,8 +235,8 @@ GeomAbsLabel <- ggplot2::ggproto(
 
       grob <- grid::gTree(
         label = lab[i],
-        x = grid::unit(data$xpos, "npc"),
-        y = grid::unit(data$ypos, "npc"),
+        x = grid::unit(row$xpos, "npc"),
+        y = grid::unit(row$ypos, "npc"),
         just = c(row$hjust, row$vjust),
         padding = label.padding,
         r = label.r,
