@@ -23,7 +23,7 @@
 #' @export zummarise
 zummarise <- function(.data, ...) {
   dplyr::ungroup(
-    dplyr::summarise_(.data, .dots = lazyeval::lazy_dots(...))
+    dplyr::summarise(.data, ...)
   )
 }
 
