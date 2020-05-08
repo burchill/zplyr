@@ -225,7 +225,7 @@ dots_and_bars <-function(gg_obj,
 #' @export
 stat_errorbar <- function(...) {
   return(list(ggplot2::stat_summary(fun.data = "mean_cl_boot", geom = "errorbar", ...),
-              ggplot2::stat_summary(fun.y = mean, geom = "point", ...)))
+              ggplot2::stat_summary(fun = mean, geom = "point", ...)))
 }
 
 #' @rdname stat_errorbar
