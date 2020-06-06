@@ -29,22 +29,14 @@ autolabel_latex_figs <- function() {
 #'
 #' @return Nothing
 #' @export
-beep_on_knit <- function(beep_sound=3, sleep=3) {
-  require(beepr)
-  last_label <- tail(knitr::all_labels(),n=1)[[1]]
-  knitr::knit_hooks$set(
-    .beep_on_last_chunk =
-      function(before, options) {
-        if (options$label == last_label & !before) {
-          # Remember, plotly_collector() returns
-          #   the collected dependencies
-          beepr::beep(beep_sound)
-          Sys.sleep(sleep)
-          invisible(NULL)
-        }
-      })
-  # Sets the options for every chunk so the hook will be run on them
-  knitr::opts_chunk$set(.beep_on_last_chunk = TRUE)
+beep_on_knit <- function(beep_sound=3, sleep=4) {
+  library(beepr)
+  prev_fn <- knitr::knit_hooks$get("document")
+  knitr::knit_hooks$set(document = function(x) {
+    beepr::beep(beep_sound)
+    Sys.sleep(sleep)
+    prev_fn(x)
+  })
 }
 
 
