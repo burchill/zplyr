@@ -6,9 +6,11 @@
 \usage{
 autolabel_latex_figs()
 }
-\value{
-Nothing
-}
 \description{
-I hate having to add \code{\\label{fig:blah}} to \code{fig.cap} in Latex .Rmd files.  There's probably a better way to do this, but if you call this function, it will automatically add \code{\\label{fig:<label>}} to the \code{fig.cap} option of any chunk with a \code{fig.cap} and a label, substituting whitespace stretches (after trimming it)
+I hate having to add \code{\\label{fig:blah}} to \code{fig.cap}
+in Latex .Rmd files.  There's probably a better way to do
+this, but if you call this function, it will automatically
+add \code{\\label{fig:<label>}} to the \code{fig.cap} option of any
+chunk with a \code{fig.cap} and a label, substituting whitespace
+stretches (after trimming it)
 }

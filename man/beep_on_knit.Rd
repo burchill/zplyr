@@ -4,15 +4,12 @@
 \alias{beep_on_knit}
 \title{Beep on successful knit}
 \usage{
-beep_on_knit(beep_sound = 3, sleep = 3)
+beep_on_knit(beep_sound = 3, sleep = 4)
 }
 \arguments{
 \item{beep_sound}{Input to \code{beepr::beep()} for what sound to play}
 
 \item{sleep}{The amount of seconds to sleep before moving on (so that the sound isn't cut off after it knits)}
-}
-\value{
-Nothing
 }
 \description{
 This function requires the \code{beepr} package. It will play a sound when the document finishes knitting.
