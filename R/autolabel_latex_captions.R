@@ -14,8 +14,9 @@ autolabel_latex_figs <- function() {
       function(options) {
         if (!is.null(options$label) && isTRUE(options$.autolabel)) {
           label = trimws(gsub("\\s+", "_", options$label))
-          options$fig.cap = paste0(options$fig.cap,
-                                   "\\label{fig:",label,"}")
+          options$fig.cap = paste0(
+            rlang::eval_tidy(options$fig.cap),
+            "\\label{fig:",label,"}")
           options
         } else {
           options
