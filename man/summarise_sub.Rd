@@ -4,8 +4,7 @@
 \alias{summarise_sub}
 \title{Add columns from nested data frames}
 \usage{
-summarise_sub(df, data_col_name, ..., handle_nulls = FALSE,
-  scoped_in = TRUE)
+summarise_sub(df, data_col_name, ..., handle_nulls = FALSE, scoped_in = TRUE)
 }
 \arguments{
 \item{df}{A data frame}

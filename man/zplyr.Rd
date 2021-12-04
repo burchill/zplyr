@@ -3,7 +3,6 @@
 \docType{package}
 \name{zplyr}
 \alias{zplyr}
-\alias{zplyr-package}
 \title{zplyr: Zachary Burchill's personal package}
 \description{
 \strong{The zplyr package has nothing to do with "plyr" or "dplyr",

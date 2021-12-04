@@ -5,11 +5,21 @@
 \alias{geom_dots_and_bars}
 \title{Make dotplots with error bars with a single function}
 \usage{
-stat_dots_and_bar(..., binaxis = "y", stackdir = "center",
-  dotsize = 0.5, alpha = 0.2)
+stat_dots_and_bar(
+  ...,
+  binaxis = "y",
+  stackdir = "center",
+  dotsize = 0.5,
+  alpha = 0.2
+)
 
-geom_dots_and_bars(..., binaxis = "y", stackdir = "center",
-  dotsize = 0.5, alpha = 0.2)
+geom_dots_and_bars(
+  ...,
+  binaxis = "y",
+  stackdir = "center",
+  dotsize = 0.5,
+  alpha = 0.2
+)
 }
 \arguments{
 \item{\dots}{Additional arguments for the \code{\link[ggplot2]{stat_summary}} pair.}
@@ -26,7 +36,7 @@ geom_dots_and_bars(..., binaxis = "y", stackdir = "center",
 A list of the \code{stat_summary} objects
 }
 \description{
-Adds a dotplot, 95\% CI error bars, and a point representing the mean
+Adds a dotplot, 95\\% CI error bars, and a point representing the mean
 to a ggplot object. Almost identical to \code{\link{stat_errorbar}}, but
 with the obvious additional \code{\link[ggplot2]{geom_dotplot}}. \cr
 \cr

@@ -6,11 +6,19 @@
 \alias{MomentLabel}
 \title{Displaying skew/kurtosis text in plots}
 \usage{
-stat_moments(mapping = NULL, data = NULL, ..., geom = c("abs_text",
-  "abs_label"), moment = c("skewness", "kurtosis", "both"),
-  sig = FALSE, excess_kurtosis = FALSE, digits = 1,
-  alternative = c("less", "greater", "two.sided"), inherit.aes = TRUE,
-  parse = FALSE)
+stat_moments(
+  mapping = NULL,
+  data = NULL,
+  ...,
+  geom = c("abs_text", "abs_label"),
+  moment = c("skewness", "kurtosis", "both"),
+  sig = FALSE,
+  excess_kurtosis = FALSE,
+  digits = 1,
+  alternative = c("less", "greater", "two.sided"),
+  inherit.aes = TRUE,
+  parse = FALSE
+)
 }
 \arguments{
 \item{mapping, data, \dots, inherit.aes, parse}{See \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} for details.}
@@ -28,7 +36,7 @@ stat_moments(mapping = NULL, data = NULL, ..., geom = c("abs_text",
 \item{alternative}{A string specifying the alternative hypothesis for the D'Agostino test. Must be one of \code{"less"} (default) \code{"two.sided"} or \code{"greater"}. You can specify just the initial letter. If \code{sig} = \code{FALSE}, this will be ignored.}
 }
 \description{
-\code{stat_moments()} summarises the data supplied to the x-axis, and draws text that displays the skewness and/or kurtosis of the data, with a variety of options. This is almost chiefly meant to be used in conjunction with a density plot, such as \code{\link[ggplot2:geom_density]{ggplot2::geom_density()}} or \code{\link[ggplot2:stat_density]{ggplot2::stat_density()}}.  Since this object is returning text, it needs to be given coordinates on where to be placed. It requires the aesthetics \code{xpos} and \code{ypos} (see \code{\link[=geom_abs_text]{geom_abs_text()}}), which are coordinates (from 0-1) relative to the panel/facet panel the text is to be displayed in.
+\code{stat_moments()} summarises the data supplied to the x-axis, and draws text that displays the skewness and/or kurtosis of the data, with a variety of options. This is almost chiefly meant to be used in conjunction with a density plot, such as \code{\link[ggplot2:geom_density]{ggplot2::geom_density()}} or \code{\link[ggplot2:geom_density]{ggplot2::stat_density()}}.  Since this object is returning text, it needs to be given coordinates on where to be placed. It requires the aesthetics \code{xpos} and \code{ypos} (see \code{\link[=geom_abs_text]{geom_abs_text()}}), which are coordinates (from 0-1) relative to the panel/facet panel the text is to be displayed in.
 }
 \examples{
 make_log_normal <- function(n, mu, sd, name) {

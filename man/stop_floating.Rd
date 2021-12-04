@@ -7,10 +7,10 @@
 stop_floating()
 }
 \description{
-When I knit R Markdown files to LaTeX, I end up putting \code{\\FloatBarrier} after every figure
+When I knit R Markdown files to LaTeX, I end up putting \verb{\\\\FloatBarrier} after every figure
 so they don't float past where I want them in the document. Using \code{knitr}'s hooks, I can make this
 process happen automatically. \cr
 \cr
 In order to do that, you first need to include the LaTeX package \code{placeins}
-(i.e., via \code{header-includes: \\usepackage{placeins}}).
+(i.e., via \verb{header-includes: \\\\usepackage\{placeins\}}).
 }

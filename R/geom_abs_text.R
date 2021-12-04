@@ -157,7 +157,7 @@ GeomAbsText <- ggplot2::ggproto(
   ggplot2::GeomCustomAnn,
 
   default_aes = ggplot2::GeomText$default_aes,
-  draw_key = ggplot2::draw_key_blank,
+  draw_key    = ggplot2::draw_key_blank,
   # required_aes = GeomText$required_aes,
   required_aes = c("xpos", "ypos", "label"),
 

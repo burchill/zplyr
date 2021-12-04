@@ -10,7 +10,7 @@ left_join(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
 \item{x, y}{tbls to join}
 
 \item{by}{a character vector of variables to join by.  If \code{NULL}, the
-default, \code{*_join()} will do a natural join, using all variables with
+default, \verb{*_join()} will do a natural join, using all variables with
 common names across the two tables. A message lists the variables so
 that you can check they're right (to suppress the message, simply
 explicitly list the variables that you want to join).

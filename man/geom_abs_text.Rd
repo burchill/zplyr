@@ -10,13 +10,27 @@
 \alias{GeomAbsLabel}
 \title{Text positioned relative to a ggplot panel/facet}
 \usage{
-geom_abs_text(mapping = NULL, data = NULL, stat = "identity", ...,
-  parse = FALSE, inherit.aes = TRUE)
+geom_abs_text(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  ...,
+  parse = FALSE,
+  inherit.aes = TRUE
+)
 
-geom_abs_label(mapping = NULL, data = NULL, stat = "identity", ...,
-  parse = FALSE, label.padding = unit(0.25, "lines"),
-  label.r = unit(0.15, "lines"), label.size = 0.25, na.rm = FALSE,
-  inherit.aes = TRUE)
+geom_abs_label(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  ...,
+  parse = FALSE,
+  label.padding = unit(0.25, "lines"),
+  label.r = unit(0.15, "lines"),
+  label.size = 0.25,
+  na.rm = FALSE,
+  inherit.aes = TRUE
+)
 
 annotate_abs_text(xpos, ypos, ...)
 
@@ -27,7 +41,7 @@ annotate_abs_label(xpos, ypos, ...)
 
 \item{\dots}{Other arguments passed on to \code{\link[ggplot2:layer]{ggplot2::layer()}}. It must include an argument named \code{label}. Otherwise, these are often aesthetics, used to set an aesthetic to a fixed value, like \code{colour = "red"}.`}
 
-\item{label.padding, label.r, label.size}{See the documentation for \code{\link[ggplot2:geom_label]{ggplot2::geom_label()}}}
+\item{label.padding, label.r, label.size}{See the documentation for \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}}
 
 \item{xpos}{A numeric between 0 and 1, indicating the x position}
 
@@ -38,7 +52,7 @@ annotate_abs_label(xpos, ypos, ...)
 \cr \cr This code and its documentation is based off code in the ggplot2 package, and thus is subject to the copy-left licenses of the original package.
 }
 \details{
-This function has only been tested in a few scenarios, and only in \code{ggplot2 v2.2.1}.
+This function has only been tested in a few scenarios, and only in \verb{ggplot2 v2.2.1}.
 }
 \examples{
 df <- data.frame(

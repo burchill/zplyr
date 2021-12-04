@@ -4,8 +4,14 @@
 \alias{filter_in_sub}
 \title{Filter within nested data frames}
 \usage{
-filter_in_sub(df, data_col_name, ..., handle_nulls = FALSE,
-  drop_empty = FALSE, scoped_in = TRUE)
+filter_in_sub(
+  df,
+  data_col_name,
+  ...,
+  handle_nulls = FALSE,
+  drop_empty = FALSE,
+  scoped_in = TRUE
+)
 }
 \arguments{
 \item{df}{A data frame / tibble}

@@ -4,15 +4,17 @@
 \alias{set_widget_hooks}
 \title{Set knitr hooks for htmlwidgets with Jekyll/GitHub Pages}
 \usage{
-set_widget_hooks(dep_dir = knitr::opts_chunk$get("plotly.savepath"),
+set_widget_hooks(
+  dep_dir = knitr::opts_chunk$get("plotly.savepath"),
   base_path = knitr::opts_chunk$get("proj.basedir"),
-  hrefFilter = function(x) paste0("/", x))
+  hrefFilter = function(x) paste0("/", x)
+)
 }
 \arguments{
 \item{dep_dir}{The directory you want to save the dependencies to.}
 
 \item{base_path}{The directory you want to make the dependency links relative to.
-For example, if your post is at the url \code{yoursite.com/this_post/}, then you'll
+For example, if your post is at the url \verb{yoursite.com/this_post/}, then you'll
 want to make \code{base_path} the home directory of your project.}
 
 \item{hrefFilter}{This function lets you perform any additional manipulations

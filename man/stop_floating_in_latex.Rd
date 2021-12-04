@@ -6,28 +6,28 @@
 \description{
 This isn't a function---it's just a note to document something that I found to be very useful. \cr
 \cr
-When I convert R Markdown files to LaTeX via \code{knitr}, I end up putting \code{\\FloatBarrier} after every figure
+When I convert R Markdown files to LaTeX via \code{knitr}, I end up putting \verb{\\\\FloatBarrier} after every figure
 so it doesn't float past where I want it in the document. Using \code{knitr}'s hooks, I can make this
 process happen automatically. \cr
 \cr
 In order to do that, you first need to include the LaTeX package \code{placeins}
-(i.e., via \code{header-includes: \\usepackage{placeins}}). Then, in the first chunk, you
-should put the function: \cr\preformatted{knitr::knit_hooks$set(plot = function (x, options) {
-  float_correct <- function(f, y, opts)  {
+(i.e., via \verb{header-includes: \\\\usepackage\{placeins\}}). Then, in the first chunk, you
+should put the function: \cr\preformatted{knitr::knit_hooks$set(plot = function (x, options) \{
+  float_correct <- function(f, y, opts)  \{
     if (is.null(opts$regfloat) || opts$regfloat==FALSE)
-      paste0(f(y, opts), "\n\n\\\\FloatBarrier\n")
+      paste0(f(y, opts), "\\n\\n\\\\\\\\FloatBarrier\\n")
     else
       f(y, opts)
-  }
+  \}
   if (!is.null(options$out.width) || !is.null(options$out.height) ||
       !is.null(options$out.extra) || options$fig.align != "default" ||
-      !is.null(options$fig.subcap)) {
+      !is.null(options$fig.subcap)) \{
     if (is.null(options$fig.scap))
       options$fig.scap = NA
     return(float_correct(knitr:::hook_plot_tex, x, options))
-  }
+  \}
   return(float_correct(knitr:::hook_plot_md_base, x, options))
-})
+\})
 }
 
 In order to disable this behavior for specific chunks, just put \code{regFloat=TRUE} as a chunk option.
