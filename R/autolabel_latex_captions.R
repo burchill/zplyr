@@ -36,7 +36,9 @@ beep_on_knit <- function(beep_sound=3, sleep=4) {
   library(beepr)
   prev_fn <- knitr::knit_hooks$get("document")
   knitr::knit_hooks$set(document = function(x) {
-    beepr::beep(beep_sound)
+    # Prevents beeping when child document is closed
+    if (knitr::opts_knit$get("child") == FALSE)
+      beepr::beep(beep_sound)
     Sys.sleep(sleep)
     prev_fn(x)
   })
